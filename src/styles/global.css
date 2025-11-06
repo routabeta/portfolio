@@ -1,0 +1,86 @@
+/* ---------------- Light mode ---------------- */
+:root {
+  --color-background: rgb(245, 235, 255);
+  --color-text: #1e293b;
+  --color-primary: #3b82f6;
+  --color-surface: #d5cff1;
+}
+
+/* ---------------- Dark mode ---------------- */
+.dark {
+  --color-background: #1e293b;
+  --color-text: #f1f5f9;
+  --color-primary: #60a5fa;
+  --color-surface: #111827;
+}
+
+/* ---------------- Base styles ---------------- */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color 0.2s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* ---------------- Utility classes ---------------- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+.items-center { align-items: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.gap-4 { gap: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.font-bold { font-weight: bold; }
+
+/* ---------------- Navbar styles ---------------- */
+.navbar {
+  background-color: var(--color-surface);
+  padding: 0.75rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar a {
+  margin-left: 1.5rem;
+}
+
+/* ---------------- Card/Surface example ---------------- */
+.card {
+  background-color: var(--color-surface);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ---------------- Dark mode transition ---------------- */
+html {
+  transition: background-color 1.2s, color 1.2s;
+}

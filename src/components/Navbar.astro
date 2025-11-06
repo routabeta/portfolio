@@ -1,0 +1,50 @@
+---
+const navLinks = [ // Add pages here if necessary
+  { name: "About", href: "/about" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/contact" },
+];
+---
+
+<!-- Navbar -->
+ 
+    <nav class="navbar flex items-center justify-between sticky top-0 z-50">
+      <a href="/">
+      MyPortfolio
+      </a>
+      
+      <div class="justify-end">
+         {navLinks.map(link => (
+          <a href={link.href}>
+            {link.name}
+          </a>
+      ))}
+
+      <!-- Dark mode toggle -->
+      <button
+        style="margin-left:1.5rem; padding:0.25rem 0.5rem; cursor:pointer;"
+        id="theme-toggle"
+      >
+        <script>
+          const html = document.documentElement;
+          const icon = document.getElementById('theme-toggle');
+
+          // Set initial icon based on current mode
+          icon.textContent = html.classList.contains('dark') ? "☀️": "🌙";
+
+          // Toggle dark mode on button click
+          document.getElementById('theme-toggle').onclick = () => {
+            html.classList.toggle('dark');
+            // Update icon immediately
+            icon.textContent = html.classList.contains('dark') ? "☀️" : "🌙";
+          };
+        </script>
+      </button>
+      <script>
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+          document.documentElement.classList.add('dark');
+        }
+      </script>
+      </div>
+    </nav>

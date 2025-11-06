@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "lc_portfolio",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {
+  "devDependencies": {
     "astro": "^5.15.3"
-  }
+  },
+  "engines": { "node": ">=18" }
 }

@@ -1,29 +1,14 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-		<style>
-			a {
-				color: blue;
-				font-size: medium;
-				font-style: italic;
-			}
-		</style>
-	</head>
-	<body>
-		<a href="/">Home</a>
-        <a href="/about/">About</a>
-		<a href="/posts/post/">temp post</a>
-		<h1>Luke Concini's Portfolio</h1>
-		<p>
-			Navigate the pages to learn more about myself and my projects!
-		</p>
-	</body>
-</html>
+<BaseLayout title="Home | My Portfolio">
+
+  <section class="text-center py-20">
+    <h1 >Hi, I'm Luke Concini</h1>
+    <p >Engineering Physics student at the University of Alberta passionate about problem solving.</p>
+  </section>
+
+</BaseLayout>
