@@ -1,0 +1,126 @@
+---
+import Particles from "astro-particles"
+import type { ISourceOptions } from "tsparticles-engine";
+
+let options: ISourceOptions = {
+    background: {
+      color: "#000000", // deep space black
+    },
+    fullScreen: { zIndex: -1 },
+    particles: {
+      number: { value: 100, density: { enable: true, area: 1000 } },
+      color: { value: "#ffffff" },
+      shape: { type: "circle" },
+      opacity: { value: 0.8, random: true },
+      size: { value: 2, random: true },
+      links: {
+        enable: true,
+        distance: 200,
+        color: "#8888ff",
+        opacity: 0.3,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "bounce" },
+        attract: { distance: 75, enable: true, rotateX: 500, rotateY: 900 },
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "grab" },
+        onClick: { enable: true, mode: "repulse" },
+      },
+      modes: {
+        grab: { distance: 150, links: { opacity: 0.5 } },
+        repulse: { distance: 75, duration: 0.4 },
+      },
+    },
+    retina_detect: true,
+  };
+
+
+---
+
+<script>
+    
+
+    import { type Container, type Engine } from "tsparticles-engine";
+    import { loadFull } from "tsparticles";
+
+    // the function name is the parameter passed to the init attribute
+    // required
+    window.particlesInit = async function (engine: Engine) {
+        await loadFull(engine);
+        
+    }
+    
+    // the function name is the parameter passed to the loaded attribute
+    // optional
+    window.particlesLoaded = function (container: Container) {
+        console.log("particlesLoaded callback");
+    
+
+    }
+
+    // Set initial particle background settings based on browser preference
+    document.addEventListener("DOMContentLoaded", () => {
+        // Wait a tick to ensure tsParticles has initialized
+        setTimeout(() => {
+            const container = window.tsParticles?.domItem(0);
+            if (!container) return;
+
+            // Get CSS variables from global.css
+            const cssObj = getComputedStyle(document.body);
+            const color_particle_background = cssObj.getPropertyValue("--color-particle-background").trim();
+            const color_particles = cssObj.getPropertyValue("--color-particles").trim();
+            const color_link = cssObj.getPropertyValue("--color-links").trim();
+
+            container.options.background.color.value = color_particle_background;
+            container.options.particles.color.value = color_particles;
+            container.options.particles.links.color = color_link;
+            container.refresh();
+            
+        }, 50); // 50ms delay to be safe
+    });
+    
+    // Update particle background color on theme toggle
+    const button = document.getElementById("theme-toggle");
+    button?.addEventListener("click", () => {
+        const container = window.tsParticles?.domItem(0);
+        if (!container) return;
+
+        const cssObj = window.getComputedStyle(document.body, null);
+        const color_particle_background = cssObj.getPropertyValue("--color-particle-background").trim();
+        const color_particles = cssObj.getPropertyValue("--color-particles").trim();
+        const color_link = cssObj.getPropertyValue("--color-links").trim();
+
+        container.options.background.color.value = color_particle_background;
+        container.options.particles.color.value = color_particles;
+        container.options.particles.links.color = color_link;
+        container.refresh();
+
+
+
+        // Smoother fade of colour changes? TODO!!!!!!!
+        // const overlay = document.getElementById("particle-overlay");
+        // toggleTheme()
+        // function setOverlayColor(color: string, alpha = 0.3) {
+        //     if (!overlay) return;
+        //     overlay.style.backgroundColor = `rgba(${color}, ${alpha})`;
+        // }
+
+        // // Example: toggle dark/light mode
+        // function toggleTheme() {
+        //     // Convert CSS variable or hex to RGB string "r,g,b"
+        //     setOverlayColor("#444444", 0.5); // alpha controls intensity
+        // }
+
+    });
+</script>
+
+<Particles id="tsparticles" options={options} init="particlesInit" />

@@ -1,4 +1,6 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-export default defineConfig({ /* future adapter/plugins here */ });
+// https://astro.build/config
+export default defineConfig({
+  // You can add your configuration options here
+});

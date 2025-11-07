@@ -1,17 +1,33 @@
-/* ---------------- Light mode ---------------- */
+/* ---------------- Dark/Light mode palatte ---------------- */
 :root {
   --color-background: rgb(245, 235, 255);
   --color-text: #1e293b;
+  --color-accent-line: #a78bfa;
   --color-primary: #3b82f6;
   --color-surface: #d5cff1;
+/* Particle background styles */
+  --color-particle-background: #c4d9f579;
+  --color-particles: #3700ff;
+  --color-links: #e70b19;
+
 }
 
-/* ---------------- Dark mode ---------------- */
 .dark {
   --color-background: #1e293b;
   --color-text: #f1f5f9;
+  --color-accent-line: #0b012a;
   --color-primary: #60a5fa;
   --color-surface: #111827;
+  /* Particle background styles */
+  --color-particle-background: rgb(0, 0, 0);
+  --color-particles: #ffffff;
+  --color-links: #8888ff;
+
+}
+
+/* Transition */
+html {
+  transition: background-color 0.6s, color 0.6s;
 }
 
 /* ---------------- Base styles ---------------- */
@@ -21,16 +37,17 @@ body {
   font-family: system-ui, sans-serif;
   margin: 0;
   min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.6s, color 0.6s;
 }
 
 a {
   text-decoration: none;
   color: var(--color-primary);
-  transition: color 0.2s;
+  transition: color 0.6s;
 }
 
-a:hover {
+a:hover,
+a:focus {
   opacity: 0.8;
 }
 
@@ -60,27 +77,81 @@ button:hover {
 .gap-4 { gap: 1rem; }
 .text-lg { font-size: 1.125rem; }
 .font-bold { font-weight: bold; }
+.sticky { position: sticky; top: 0; z-index: 1000; }
+
+/* ---------------- Particle background transition style ---------------- */
+#particle-overlay {
+  position: absolute;
+  inset: 0;               /* fills entire parent */
+  pointer-events: none;   /* clicks pass through to particles */
+  transition: background-color 0.6s ease;
+  z-index: 0;             /* above only particles with z=-1 */
+}
 
 /* ---------------- Navbar styles ---------------- */
 .navbar {
+  border: 1px solid var(--color-accent-line);
+  border-radius: 1rem 1rem 1rem 1rem; 
   background-color: var(--color-surface);
   padding: 0.75rem 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin: 1rem 3rem;
+  opacity: 0.5;
 }
 
 .navbar a {
   margin-left: 1.5rem;
 }
 
-/* ---------------- Card/Surface example ---------------- */
+/* ---------------- Footer styles ---------------- */
+.site-footer {
+  border: 1px solid var(--color-accent-line);
+  border-radius: 1rem 1rem 1rem 1rem; 
+  padding: .5rem 2rem;
+  margin: 1rem 10rem;
+  background-color: var(--color-surface);
+  opacity: 0.5;
+}
+.footer-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 1000 auto;
+}
+.social-icons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.social-link {
+  color: var(--color-text);
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.18s ease, transform 0.12s ease;
+}
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.social-link:hover,
+.social-link:focus {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+.footer-copy {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+/* ---------------- TODO ---------------- */
 .card {
   background-color: var(--color-surface);
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* ---------------- Dark mode transition ---------------- */
-html {
-  transition: background-color 1.2s, color 1.2s;
 }

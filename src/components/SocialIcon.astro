@@ -1,0 +1,12 @@
+---
+const { href = '#', label = '', target = '_blank', rel = 'noopener noreferrer' } = Astro.props;
+---
+
+<a class="social-link" href={href} target={target} rel={rel} aria-label={label}>
+  <slot>
+    <!-- Fallback to circle -->
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="8" />
+    </svg>
+  </slot>
+</a>
