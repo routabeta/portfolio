@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+---
+
+<BaseLayout title="Projects" description="A portfolio of my projects, showcasing my skills and experience.">
+
+        <section class="projects-page ">
+            <div class="page-inner ">
+                <header class="projects-header">
+                    <h1>Projects</h1>
+                    <p class="lead">A small selection of projects I've worked on — focused, concise, and with source where available.</p>
+                </header>
+
+                <div class="project-grid">
+                    <ProjectCard
+                        title="Killswitch PCB"
+                        description="SMALL PROJECT DESC." 
+                        tech={["Altium", "JLCPCB"]}
+                        demolabel="Homepage"
+                        demolink="/"
+                        repolabel="Source"
+                        repolink="https://github.com/routabeta/portfolio"
+                    />
+                    <ProjectCard
+                        title="Killswitch PCB"
+                        description="SMALL PROJECT DESC." 
+                        tech={["Altium", "JLCPCB"]}
+                        demolabel="Homepage"
+                        demolink="/"
+                        repolabel="Source"
+                        repolink="https://github.com/routabeta/portfolio"
+                    /><ProjectCard
+                        title="Killswitch PCB"
+                        description="SMALL PROJECT DESC." 
+                        tech={["Altium", "JLCPCB"]}
+                        demolabel="Homepage"
+                        demolink="/"
+                        repolabel="Source"
+                        repolink="https://github.com/routabeta/portfolio"
+                    /><ProjectCard
+                        title="Killswitch PCB"
+                        description="SMALL PROJECT DESC." 
+                        tech={["Altium", "JLCPCB"]}
+                        demolabel="Homepage"
+                        demolink="/"
+                        repolabel="Source"
+                        repolink="https://github.com/routabeta/portfolio"
+                    />
+
+                    <ProjectCard
+                        title="Portfolio Website"
+                        description="My Built with a focus on maintainable structure and clean UI/UX."
+                        tech={["Astro", "JavaScript", "CSS"]}
+                        demolabel="Homepage"
+                        demolink="/"
+                        repolabel="Source"
+                        repolink="https://github.com/routabeta/portfolio"
+                    />
+
+                </div>
+            </div>
+        </section>
+  
+
+</BaseLayout>

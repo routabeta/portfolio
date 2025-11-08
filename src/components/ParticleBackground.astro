@@ -5,29 +5,30 @@ import type { ISourceOptions } from "tsparticles-engine";
 let options: ISourceOptions = {
     background: {
       color: "#000000", // deep space black
+      opacity: 0.5,
     },
     fullScreen: { zIndex: -1 },
     particles: {
-      number: { value: 100, density: { enable: true, area: 1000 } },
+      number: { value: 90, density: { enable: true, area: 1000 } },
       color: { value: "#ffffff" },
       shape: { type: "circle" },
       opacity: { value: 0.8, random: true },
       size: { value: 2, random: true },
       links: {
         enable: true,
-        distance: 200,
-        color: "#8888ff",
+        distance: 160,
+        color: { value: "#8888ff" },
         opacity: 0.3,
         width: 1,
       },
       move: {
         enable: true,
-        speed: 1,
+        speed: 0.8,
         direction: "none",
         random: true,
         straight: false,
         outModes: { default: "bounce" },
-        attract: { distance: 75, enable: true, rotateX: 500, rotateY: 900 },
+        attract: { distance: 90, enable: true, rotateX: 100, rotateY: 900 },
       },
     },
     interactivity: {
@@ -36,7 +37,7 @@ let options: ISourceOptions = {
         onClick: { enable: true, mode: "repulse" },
       },
       modes: {
-        grab: { distance: 150, links: { opacity: 0.5 } },
+        grab: { distance: 150, links: { opacity: 0.5, color: { value: "#8888ff" } } },
         repulse: { distance: 75, duration: 0.4 },
       },
     },
@@ -67,22 +68,59 @@ let options: ISourceOptions = {
 
     }
 
-    // Set initial particle background settings based on browser preference
-    document.addEventListener("DOMContentLoaded", () => {
-        // Wait a tick to ensure tsParticles has initialized
-        setTimeout(() => {
-            const container = window.tsParticles?.domItem(0);
-            if (!container) return;
+    // read themes from css for dynamc switching
+    function getThemeVars(varNames: string[]) {
+        const sheets = Array.from(document.styleSheets) as CSSStyleSheet[];
+        const result: Record<string, { light?: string; dark?: string }> = {};
 
-            // Get CSS variables from global.css
-            const cssObj = getComputedStyle(document.body);
-            const color_particle_background = cssObj.getPropertyValue("--color-particle-background").trim();
-            const color_particles = cssObj.getPropertyValue("--color-particles").trim();
-            const color_link = cssObj.getPropertyValue("--color-links").trim();
+        varNames.forEach((varName) => {
+            result[varName] = { light: undefined, dark: undefined };
 
-            container.options.background.color.value = color_particle_background;
-            container.options.particles.color.value = color_particles;
-            container.options.particles.links.color = color_link;
+      sheets.forEach((sheet) => {
+        try {
+          Array.from(sheet.cssRules).forEach((rule: CSSRule) => {
+            if (!(rule instanceof CSSStyleRule)) return;
+
+            if (rule.selectorText === ":root") {
+              const val = rule.style.getPropertyValue(varName).trim();
+              if (val) result[varName].light = val;
+            } else if (rule.selectorText === ".dark") {
+              const val = rule.style.getPropertyValue(varName).trim();
+              if (val) result[varName].dark = val;
+            }
+          });
+        } catch (e) {
+          // ignore cross-origin stylesheets
+        }
+      });
+    });
+
+    return result;
+    }
+
+  const themes = getThemeVars([
+    "--color-particle-background",
+    "--color-particles",
+    "--color-links",
+  ]);
+
+  // Set initial particle background settings based on current theme
+  document.addEventListener("DOMContentLoaded", () => {
+    // Wait a short tick to ensure tsParticles has initialized
+    setTimeout(() => {
+      const container = window.tsParticles?.domItem(0);
+      if (!container) return;
+
+            // Check if initial is dark or light
+            const html = document.documentElement; // Get html element
+            const isDark = !html.classList.contains("dark");
+
+            // Get update colours based on css settings (use themes dictionary object)
+            container.options.background.color.value = isDark ? themes["--color-particle-background"].light : themes["--color-particle-background"].dark;
+            container.options.particles.color.value = isDark ? themes["--color-particles"].light : themes["--color-particles"].dark;
+            container.options.particles.links.color.value = isDark ? themes["--color-links"].light : themes["--color-links"].dark;
+            container.options.particles.move.speed = isDark ? 2.1 : 0.6;
+            
             container.refresh();
             
         }, 50); // 50ms delay to be safe
@@ -91,36 +129,44 @@ let options: ISourceOptions = {
     // Update particle background color on theme toggle
     const button = document.getElementById("theme-toggle");
     button?.addEventListener("click", () => {
-        const container = window.tsParticles?.domItem(0);
-        if (!container) return;
+        const html = document.documentElement; // Get html element
+        const overlay = document.getElementById("particle-overlay"); // Get particle overlay div
+        const container = window.tsParticles?.domItem(0); // Get tsParticles container
+        if (!container || !overlay) return;
 
-        const cssObj = window.getComputedStyle(document.body, null);
-        const color_particle_background = cssObj.getPropertyValue("--color-particle-background").trim();
-        const color_particles = cssObj.getPropertyValue("--color-particles").trim();
-        const color_link = cssObj.getPropertyValue("--color-links").trim();
+        // Use pre-read colours to load
+        const wasDark = !html.classList.contains("dark");
+        const oldColor = wasDark ? themes["--color-particle-background"].dark : themes["--color-particle-background"].light;
+        const newColor = wasDark ? themes["--color-particle-background"].light : themes["--color-particle-background"].dark;
 
-        container.options.background.color.value = color_particle_background;
-        container.options.particles.color.value = color_particles;
-        container.options.particles.links.color = color_link;
-        container.refresh();
+    // cover the screen with the old color immediately
+    overlay.style.transition = "none";
+    overlay.style.backgroundColor = oldColor;
+    overlay.style.opacity = "0.8";
+    overlay.getBoundingClientRect(); // force style repaint
 
+    // Update particle settings and refresh (instant switch)
+    container.options.background.color.value = wasDark ? themes["--color-particle-background"].light : themes["--color-particle-background"].dark;
+    container.options.particles.color.value = wasDark ? themes["--color-particles"].light : themes["--color-particles"].dark;
+    container.options.particles.links.color.value = wasDark ? themes["--color-links"].light : themes["--color-links"].dark;
+    container.options.particles.move.speed = wasDark ? 2.1 : 0.6;
+    container.refresh();
 
+        // Fade the overly div from old colour and opaque to new colour and transparent
+        requestAnimationFrame(() => {
+            overlay.style.transition = "background-color 0.6s ease, opacity 0.6s ease";
+            overlay.style.backgroundColor = newColor;
+            overlay.style.opacity = "0";
+        });
 
-        // Smoother fade of colour changes? TODO!!!!!!!
-        // const overlay = document.getElementById("particle-overlay");
-        // toggleTheme()
-        // function setOverlayColor(color: string, alpha = 0.3) {
-        //     if (!overlay) return;
-        //     overlay.style.backgroundColor = `rgba(${color}, ${alpha})`;
-        // }
-
-        // // Example: toggle dark/light mode
-        // function toggleTheme() {
-        //     // Convert CSS variable or hex to RGB string "r,g,b"
-        //     setOverlayColor("#444444", 0.5); // alpha controls intensity
-        // }
 
     });
+
+  
 </script>
 
-<Particles id="tsparticles" options={options} init="particlesInit" />
+<div id="particle-wrapper">
+    <div id="particle-gradient"></div>
+    </div><Particles id="tsparticles" options={options} init="particlesInit" />
+    <div id="particle-overlay"></div>
+</div>

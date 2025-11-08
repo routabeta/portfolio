@@ -1,33 +1,42 @@
 /* ---------------- Dark/Light mode palatte ---------------- */
 :root {
-  --color-background: rgb(245, 235, 255);
-  --color-text: #1e293b;
-  --color-accent-line: #a78bfa;
-  --color-primary: #3b82f6;
-  --color-surface: #d5cff1;
-/* Particle background styles */
-  --color-particle-background: #c4d9f579;
-  --color-particles: #3700ff;
-  --color-links: #e70b19;
-
+  /* Solid Background and Accent Gradient - adjust opacity of background for style! */
+  --color-background: rgb(238, 239, 249); 
+  --linear-grad: linear-gradient(to bottom right, rgb(221, 219, 227), rgb(226, 179, 230));  
+  --color-text: rgb(20, 28, 40);
+  --color-accent-line: rgb(181, 186, 254);
+  --color-primary: rgb(59, 130, 246);
+  --color-surface: rgb(220, 221, 249);
+/*  background styles */
+  --color-particle-background:rgb(248, 249, 251);
+  --color-particles: rgb(231, 108, 174);
+  --color-links: rgb(136, 136, 255);
 }
 
 .dark {
-  --color-background: #1e293b;
-  --color-text: #f1f5f9;
-  --color-accent-line: #0b012a;
-  --color-primary: #60a5fa;
-  --color-surface: #111827;
+  /* Solid Background and Accent Gradient - adjust opacity of background for style! */
+  --color-background: rgb(0, 0, 0);
+  --linear-grad: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(59, 17, 62)); 
+  --color-text: rgb(241, 245, 249);
+  --color-accent-line: rgb(11, 1, 42);
+  --color-primary: rgb(96, 165, 250);
+  --color-surface: rgb(17, 24, 39);
   /* Particle background styles */
   --color-particle-background: rgb(0, 0, 0);
-  --color-particles: #ffffff;
-  --color-links: #8888ff;
-
+  --color-particles: rgb(255, 255, 255);
+  --color-links: rgb(136, 136, 255);
 }
 
 /* Transition */
 html {
   transition: background-color 0.6s, color 0.6s;
+}
+
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+  transition: none !important;
+  animation: none !important;
 }
 
 /* ---------------- Base styles ---------------- */
@@ -63,6 +72,14 @@ button:hover {
   opacity: 0.8;
 }
 
+/* ---------------- Landing page styles ---------------- */
+
+.landing-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+
 /* ---------------- Utility classes ---------------- */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -77,25 +94,56 @@ button:hover {
 .gap-4 { gap: 1rem; }
 .text-lg { font-size: 1.125rem; }
 .font-bold { font-weight: bold; }
-.sticky { position: sticky; top: 0; z-index: 1000; }
+.sticky { position: sticky;  z-index: 1000; }
+
+.frosted {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(3px);
+}
 
 /* ---------------- Particle background transition style ---------------- */
+
+#particle-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3; /* behind particle canvas (-1) and overlay (0) */
+}
+
+#particle-gradient {
+  position: absolute;
+  inset: 0;
+  background-image: var(--linear-grad);
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s ease;
+  z-index: -2; /* behind particles */
+  pointer-events: none;
+}
+
 #particle-overlay {
   position: absolute;
-  inset: 0;               /* fills entire parent */
-  pointer-events: none;   /* clicks pass through to particles */
-  transition: background-color 0.6s ease;
-  z-index: 0;             /* above only particles with z=-1 */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: transparent;
+  opacity: 0;
+  transition:
+    background-color 0.6s ease,
+    opacity 0.6s ease;
+  z-index: 0; /* above particles (z:-1), below everything else */
 }
 
 /* ---------------- Navbar styles ---------------- */
 .navbar {
   border: 1px solid var(--color-accent-line);
   border-radius: 1rem 1rem 1rem 1rem; 
-  background-color: var(--color-surface);
+  background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
   padding: 0.75rem 2rem;
   margin: 1rem 3rem;
-  opacity: 0.5;
+  top: 5px;
+  z-index: 10;
 }
 
 .navbar a {
@@ -110,6 +158,7 @@ button:hover {
   margin: 1rem 10rem;
   background-color: var(--color-surface);
   opacity: 0.5;
+  z-index: 10;
 }
 .footer-inner {
   display: flex;
@@ -148,10 +197,90 @@ button:hover {
   color: var(--color-text);
 }
 
-/* ---------------- TODO ---------------- */
-.card {
+
+/* ---------------- Projects page / ProjectCard styles ---------------- */
+.projects-page {
+  padding: 2rem, 0, 4rem, 0; 
+  background-color: var(--color-background); 
+  transition: background-color 0.6s, color 0.6s;
+  z-index: 1;  
+}
+
+.page-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.projects-header {
+  margin-bottom: 1.25rem;
+}
+
+.projects-header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+}
+
+.projects-header .lead {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-text) 75%, transparent);
+  opacity: 0.92;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* max 2 columns */
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
   background-color: var(--color-surface);
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.project-card-header { margin-bottom: 0.5rem; }
+.project-title { margin: 0; font-size: 1.125rem; }
+.project-desc { margin: 0 0 0.75rem 0; color: var(--color-text); opacity: 0.92; }
+.project-tech { list-style: none; margin: 0 0 0.75rem 0; padding: 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tech-item { background: rgba(0,0,0,0.04); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.8rem; color: var(--color-text); }
+.project-card-footer { margin-top: 0.5rem; }
+.project-links { display: flex; gap: 0.5rem; }
+
+/* Buttons */
+.btn { 
+  display: inline-block; 
+  padding: 0.4rem 0.75rem; 
+  border-radius: 0.375rem; 
+  background: var(--color-primary); 
+  color: white; 
+  text-decoration: none; 
+  font-size: 0.9rem; 
+}
+
+.btn-ghost { 
+  background: transparent; 
+  color: var(--color-text); 
+  border: 1px solid rgba(0,0,0,0.06); 
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 90%, black);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: rgba(0, 0, 0, 0.05);
 }

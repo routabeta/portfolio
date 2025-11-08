@@ -4,17 +4,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ParticleBackground from "../components/ParticleBackground.astro";
 ---
 
-<BaseLayout title="Home | My Portfolio">
+<BaseLayout title="Landing Page" description="Welcome to the landing page of my portfolio website. Here you will find information about my interests, projects, and how to contact me!">
 
-  <div id="particle-overlay">
+  
   <ParticleBackground/>
   </div>
 
-  <section class="flex flex-col items-center text-center py-20">
-    <h1 >Hi, I'm Luke Concini</h1>
-    <p> I am an Engineering Physics Co-op student at the <a href="https://www.ualberta.ca/en/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> passionate about problem solving.</p>
-
+  <section class="landing-page flex flex-col items-center text-center py-8">
+    <div class="page-inner flex flex-col items-center text-center py-8">
+    <h1 >Luke Concini</h1>
     
+    <p> Hi! My name is Luke, and I am an Engineering Physics Co-op student at the <a href="https://www.ualberta.ca/en/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>.
+      
+        problem solving, climbing and mountians, baking, engg projects (robotics, circuits) physics coding
+      
+    </div>
   </section>
   
 

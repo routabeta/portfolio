@@ -1,0 +1,32 @@
+---
+// Props:
+// - title: string
+// - description: string
+// - tech: array of strings (optional)
+// - demo: url (optional)
+// - repo: url (optional)
+const { title = '', description = '', tech = [], demolabel = '', repolabel = '', demolink = '', repolink = '' } = Astro.props;
+---
+
+<article class="project-card card">
+  <header class="project-card-header">
+    <h3 class="project-title">{title}</h3>
+  </header>
+
+  <div class="project-body">
+    <p class="project-desc">{description}</p>
+
+    {tech && tech.length > 0 ? (
+      <ul class="project-tech">
+        {tech.map(t => (<li class="tech-item">{t}</li>))}
+      </ul>
+    ) : null}
+  </div>
+
+  <footer class="project-card-footer">
+    <div class="project-links">
+      {demolink ? <a class="btn" href={demolink} target="_blank" rel="noopener noreferrer">{demolabel}</a> : null}
+      {repolink ? <a class="btn btn-ghost" href={repolink} target="_blank" rel="noopener noreferrer">{repolabel}</a> : null}
+    </div>
+  </footer>
+</article>
