@@ -16,6 +16,7 @@
 .dark {
   /* Solid Background and Accent Gradient - adjust opacity of background for style! */
   --color-background: rgb(0, 0, 0);
+  /* --linear-grad: linear-gradient(to bottom right, rgb(24, 79, 230), rgb(227, 0, 243));  */
   --linear-grad: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(59, 17, 62)); 
   --color-text: rgb(241, 245, 249);
   --color-accent-line: rgb(11, 1, 42);
@@ -29,7 +30,7 @@
 
 /* Transition */
 html {
-  transition: background-color 0.6s, color 0.6s;
+  transition: background-color 0.4s, color 0.4s;
 }
 
 .no-transition *,
@@ -46,13 +47,13 @@ body {
   font-family: system-ui, sans-serif;
   margin: 0;
   min-height: 100vh;
-  transition: background-color 0.6s, color 0.6s;
+  transition: background-color 0.4s, color 0.4s;
 }
 
 a {
   text-decoration: none;
   color: var(--color-primary);
-  transition: color 0.6s;
+  transition: color 0.4s;
 }
 
 a:hover,
@@ -96,10 +97,9 @@ button:hover {
 .font-bold { font-weight: bold; }
 .sticky { position: sticky;  z-index: 1000; }
 
-.frosted {
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(3px);
-}
+/* .frosted {
+  background-color: red;
+} */
 
 /* ---------------- Particle background transition style ---------------- */
 
@@ -110,7 +110,7 @@ button:hover {
   z-index: -3; /* behind particle canvas (-1) and overlay (0) */
 }
 
-#particle-gradient {
+ #particle-gradient {
   position: absolute;
   inset: 0;
   background-image: var(--linear-grad);
@@ -119,7 +119,7 @@ button:hover {
   transition: opacity 0.3s ease;
   z-index: -2; /* behind particles */
   pointer-events: none;
-}
+} 
 
 #particle-overlay {
   position: absolute;
@@ -130,8 +130,8 @@ button:hover {
   background-color: transparent;
   opacity: 0;
   transition:
-    background-color 0.6s ease,
-    opacity 0.6s ease;
+    background-color 0.4s ease,
+    opacity 0.4s ease;
   z-index: 0; /* above particles (z:-1), below everything else */
 }
 
@@ -160,6 +160,13 @@ button:hover {
   opacity: 0.5;
   z-index: 10;
 }
+
+@media (max-width: 1000px) {
+  .site-footer {
+    margin: 5%;
+  }
+}
+
 .footer-inner {
   display: flex;
   gap: 1rem;
@@ -198,16 +205,16 @@ button:hover {
 }
 
 
-/* ---------------- Projects page / ProjectCard styles ---------------- */
+/* ---------------- Projects page  ---------------- */
 .projects-page {
   padding: 2rem, 0, 4rem, 0; 
   background-color: var(--color-background); 
-  transition: background-color 0.6s, color 0.6s;
+  transition: background-color 0.4s, color 0.4s;
   z-index: 1;  
 }
 
 .page-inner {
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -229,58 +236,220 @@ button:hover {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* max 2 columns */
   gap: 1rem;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  align-items: flex-start; 
+  break-inside: avoid;
+
+
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .project-grid {
-    grid-template-columns: 1fr; /* 1 column on small screens */
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1, minmax(150, 1fr));
   }
-}
+} */
 
+/* ---------------- Project Card ---------------- */
 .project-card {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   min-height: 180px;
-  background-color: var(--color-surface);
   padding: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: var(--color-surface);
+  transition: transform 0.3s linear, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
-.project-card-header { margin-bottom: 0.5rem; }
-.project-title { margin: 0; font-size: 1.125rem; }
-.project-desc { margin: 0 0 0.75rem 0; color: var(--color-text); opacity: 0.92; }
-.project-tech { list-style: none; margin: 0 0 0.75rem 0; padding: 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
-.tech-item { background: rgba(0,0,0,0.04); padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.8rem; color: var(--color-text); }
-.project-card-footer { margin-top: 0.5rem; }
-.project-links { display: flex; gap: 0.5rem; }
-
-/* Buttons */
-.btn { 
-  display: inline-block; 
-  padding: 0.4rem 0.75rem; 
-  border-radius: 0.375rem; 
-  background: var(--color-primary); 
-  color: white; 
-  text-decoration: none; 
-  font-size: 0.9rem; 
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.btn-ghost { 
-  background: transparent; 
-  color: var(--color-text); 
-  border: 1px solid rgba(0,0,0,0.06); 
+/* ---------------- Buttons ---------------- */
+
+.btn {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
 .btn:hover,
 .btn:focus-visible {
   background: color-mix(in srgb, var(--color-primary) 90%, black);
+  transform: scale(1.03);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn-ghost:hover,
 .btn-ghost:focus-visible {
-  background: rgba(0, 0, 0, 0.05);
+  background: color-mix(in srgb, var(--color-primary) 20%, black);
+  transform: scale(1.03);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.card-link {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* ---------------- Image & Overlay Styles ---------------- */
+
+.card-image-wrapper {
+  width: 100%;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-link:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover .card-image {
+  filter: brightness(60%);
+  transform: scale(1.05);
+}
+
+.project-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  width: 100%;        
+  max-width: 600px;   
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 0.5rem;
+
+}
+
+.overlay-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+
+.overlay-desc {
+  margin: 0 0 0.75rem 0;
+  color: #fff;
+}
+
+.overlay-tech {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.overlay-tech-item {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.overlay-interest-links {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  gap: 0.4rem;             
+}
+
+/* ---------------- Default card ---------------- */
+
+.card-content {
+  max-width: 600px;   
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.card-desc {
+  margin: 0 0 0.75rem 0;
+  color: var(--color-text);
+  flex-grow: 1;
+}
+
+.tech-item {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.interest-links {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  gap: 0.4rem;             
+}
+

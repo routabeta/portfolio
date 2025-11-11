@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import ProjectCardImageLink from "../components/ProjectCardImageLink.astro";
+import ProjectCardImage from "../components/ProjectCardImage.astro";
+import ProjectCardLink from "../components/ProjectCardLink.astro";
 
 ---
 
@@ -10,46 +12,98 @@ import ProjectCard from "../components/ProjectCard.astro";
             <div class="page-inner ">
                 <header class="projects-header">
                     <h1>Projects</h1>
-                    <p class="lead">A small selection of projects I've worked on — focused, concise, and with source where available.</p>
+                    <p class="lead">Here are a few of the projects I've worked on!</p>
                 </header>
 
                 <div class="project-grid">
-                    <ProjectCard
+                    <!-- <ProjectCard
                         title="Killswitch PCB"
                         description="SMALL PROJECT DESC." 
+                        slug="example-project-two"
                         tech={["Altium", "JLCPCB"]}
                         demolabel="Homepage"
                         demolink="/"
                         repolabel="Source"
                         repolink="https://github.com/routabeta/portfolio"
-                    />
-                    <ProjectCard
-                        title="Killswitch PCB"
-                        description="SMALL PROJECT DESC." 
-                        tech={["Altium", "JLCPCB"]}
-                        demolabel="Homepage"
-                        demolink="/"
-                        repolabel="Source"
-                        repolink="https://github.com/routabeta/portfolio"
-                    /><ProjectCard
-                        title="Killswitch PCB"
-                        description="SMALL PROJECT DESC." 
-                        tech={["Altium", "JLCPCB"]}
-                        demolabel="Homepage"
-                        demolink="/"
-                        repolabel="Source"
-                        repolink="https://github.com/routabeta/portfolio"
-                    /><ProjectCard
-                        title="Killswitch PCB"
-                        description="SMALL PROJECT DESC." 
-                        tech={["Altium", "JLCPCB"]}
-                        demolabel="Homepage"
-                        demolink="/"
-                        repolabel="Source"
-                        repolink="https://github.com/routabeta/portfolio"
-                    />
+                    /> -->
 
-                    <ProjectCard
+                    <ProjectCardImageLink
+                        title="IMAGE link"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+                        image="/favicon.svg"
+                        imagealt="Default Ico"
+                    /> 
+
+                     <ProjectCardImageLink
+                        title="IMAGE link"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+                        image="/favicon.svg"
+                        imagealt="Default Ico"
+                    /> 
+                    
+                    
+                    <ProjectCardImage
+                        title="IMAGE nolink"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        image="/github.svg"
+                        imagealt="Default Ico"
+                    />
+                    <ProjectCardLink
+                        title="NOKIMAGE link"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+   
+                    /> 
+
+                    <ProjectCardImage
+                        title="IMAGE nolink"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        image="/github.svg"
+                        imagealt="Default Ico"
+                    />
+                    <ProjectCardLink
+                        title="NOKIMAGE link"
+                        description="Another small project demonstrating data processing and visualization." 
+                        tech={["Python", "D3"]}
+                        repolabel="Source"
+                        repolink="#"
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+   
+                    /> 
+
+                    
+
+
+                    <!-- <ProjectCard
                         title="Portfolio Website"
                         description="My Built with a focus on maintainable structure and clean UI/UX."
                         tech={["Astro", "JavaScript", "CSS"]}
@@ -57,8 +111,7 @@ import ProjectCard from "../components/ProjectCard.astro";
                         demolink="/"
                         repolabel="Source"
                         repolink="https://github.com/routabeta/portfolio"
-                    />
-
+                    /> -->
                 </div>
             </div>
         </section>

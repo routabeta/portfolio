@@ -69,34 +69,54 @@ let options: ISourceOptions = {
     }
 
     // read themes from css for dynamc switching
-    function getThemeVars(varNames: string[]) {
-        const sheets = Array.from(document.styleSheets) as CSSStyleSheet[];
-        const result: Record<string, { light?: string; dark?: string }> = {};
+    // function getThemeVars(varNames: string[]) {
+    //     const sheets = Array.from(document.styleSheets) as CSSStyleSheet[];
+    //     const result: Record<string, { light?: string; dark?: string }> = {};
 
-        varNames.forEach((varName) => {
-            result[varName] = { light: undefined, dark: undefined };
+    //     varNames.forEach((varName) => {
+    //         result[varName] = { light: undefined, dark: undefined };
 
-      sheets.forEach((sheet) => {
-        try {
-          Array.from(sheet.cssRules).forEach((rule: CSSRule) => {
-            if (!(rule instanceof CSSStyleRule)) return;
+    //   sheets.forEach((sheet) => {
+    //     try {
+    //       Array.from(sheet.cssRules).forEach((rule: CSSRule) => {
+    //         if (!(rule instanceof CSSStyleRule)) return;
 
-            if (rule.selectorText === ":root") {
-              const val = rule.style.getPropertyValue(varName).trim();
-              if (val) result[varName].light = val;
-            } else if (rule.selectorText === ".dark") {
-              const val = rule.style.getPropertyValue(varName).trim();
-              if (val) result[varName].dark = val;
-            }
-          });
-        } catch (e) {
-          // ignore cross-origin stylesheets
-        }
+    //         if (rule.selectorText === ":root") {
+    //           const val = rule.style.getPropertyValue(varName).trim();
+    //           if (val) result[varName].light = val;
+    //         } else if (rule.selectorText === ".dark") {
+    //           const val = rule.style.getPropertyValue(varName).trim();
+    //           if (val) result[varName].dark = val;
+    //         }
+    //       });
+    //     } catch (e) {
+    //       // ignore cross-origin stylesheets
+    //     }
+    //   });
+    // });
+
+    // return result;
+    // }
+
+    function getThemeVars(varNames) {
+      const root = document.documentElement;
+      const darkProbe = document.createElement('div');
+      darkProbe.classList.add('dark');
+      document.body.appendChild(darkProbe);
+
+      let result = {};
+
+      varNames.forEach((name) => {
+        // read computed styles
+        const lightVal = getComputedStyle(root).getPropertyValue(name).trim();
+        const darkVal = getComputedStyle(darkProbe).getPropertyValue(name).trim();
+        result[name] = { light: lightVal, dark: darkVal };
       });
-    });
 
-    return result;
+      document.body.removeChild(darkProbe);
+      return result;
     }
+
 
   const themes = getThemeVars([
     "--color-particle-background",
@@ -154,7 +174,7 @@ let options: ISourceOptions = {
 
         // Fade the overly div from old colour and opaque to new colour and transparent
         requestAnimationFrame(() => {
-            overlay.style.transition = "background-color 0.6s ease, opacity 0.6s ease";
+            overlay.style.transition = "background-color 0.4s ease, opacity 0.4s ease";
             overlay.style.backgroundColor = newColor;
             overlay.style.opacity = "0";
         });

@@ -1,0 +1,64 @@
+--- 
+const {
+  title = '',
+  description = '',
+  tech = [],
+  demolabel = 'Demo',
+  repolabel = 'Source',
+  demolink = '',
+  repolink = '',
+  image = '',
+  imageAlt = '',
+} = Astro.props;
+
+
+// USAGE
+// Mandatory 'title' and 'description'
+// Any 'tech' labels will show the various skills/tools used
+// Providing a 'demolink' and 'demolabel' will create a demo button
+// Providing a 'repolink' and 'repolabel' will create a source code button
+// Adding 'image' and 'imageAlt' will create and image overlay
+--- 
+
+
+<article class="project-card">
+      <div class="card-image-wrapper">
+        <img src={image} alt={imageAlt || title} class="card-image" />
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <h3 class="overlay-title">{title}</h3>
+            {description && <p class="overlay-desc">{description}</p>}
+            {tech.length > 0 && (
+              <ul class="overlay-tech">
+                {tech.map((t) => <li class="overlay-tech-item">{t}</li>)}
+              </ul>
+            )}
+
+            <div class="overlay-interest-links">
+              {demolink && (
+                <a
+                  class="btn"
+                  href={demolink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {demolabel}
+                </a>
+              )}
+              {repolink && (
+                <a
+                  class="btn btn-ghost"
+                  href={repolink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {repolabel}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+</article>

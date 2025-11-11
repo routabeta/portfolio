@@ -16,7 +16,6 @@ const { title = "Portfolio", description = "" } = Astro.props;
           const k='theme-preference';
           const s=localStorage.getItem(k);
           const html=document.documentElement;
-          console.log(s)
           if(s==='dark') html.classList.add('dark');
           else if(s==='light') html.classList.remove('dark');
           else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) html.classList.add('dark');
