@@ -44,7 +44,7 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: system-ui, sans-serif;
+  font-family: "Ubuntu Mono", monospace;
   margin: 0;
   min-height: 100vh;
   transition: background-color 0.4s, color 0.4s;
@@ -244,13 +244,11 @@ button:hover {
 
 }
 
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
   .project-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(1, minmax(150, 1fr));
+      grid-template-columns: repeat(1, minmax(250px, 1fr));
   }
-} */
+}
 
 /* ---------------- Project Card ---------------- */
 .project-card {
