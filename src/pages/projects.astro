@@ -8,6 +8,11 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
 
 <BaseLayout title="Projects" description="A portfolio of my projects, showcasing my skills and experience.">
 
+    <!-- Load masonry -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+
         <section class="projects-page ">
             <div class="page-inner ">
                 <header class="projects-header">
@@ -15,7 +20,11 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                     <p class="lead">Here are a few of the projects I've worked on! Click on the project card to read more about each one!</p>
                 </header>
 
-                <div class="project-grid">
+                <!-- reference grid object for masonry layout -->
+               
+
+                <div class="projects-grid">
+                     <div class="grid-sizer"></div>
                     <!-- <ProjectCard
                         title="Killswitch PCB"
                         description="SMALL PROJECT DESC." 
@@ -27,6 +36,7 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                         repolink="https://github.com/routabeta/portfolio"
                     /> -->
 
+                    <div class="grid-item">
                     <ProjectCardImageLink
                         title="Killswitch PCB"
                         description="Hall-effect sensor PCB for autonomous submarines to ensure diver safety." 
@@ -37,45 +47,10 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                         image="./killswitch_pcb_raw.png"
                         imagealt="Killswitch PCB"
                     /> 
-
-                    <ProjectCardImageLink
-                        title="Killswitch PCB"
-                        description="Hall-effect sensor PCB for autonomous submarines to ensure diver safety." 
-                        tech={["Altium Designer", "PCB Assembly"]}
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-                        image="./killswitch_pcb_raw.png"
-                        imagealt="Killswitch PCB"
-                    /> 
-
-                     <ProjectCardImageLink 
-                        title="IMAGE link"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-                        image="/favicon.svg"
-                        imagealt="Default Ico"
-                    /> 
-                    
-                
-                    <ProjectCardLink 
-                        title="NOKIMAGE link"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-   
-                    /> 
+                    </div>
 
       
+                    <div class="grid-item">
                     <ProjectCardLink class="grid"
                         title="Portfolio Website"
                         description="Astro site built with a focus on clean UI/UX to show a bit of who I am!" 
@@ -83,13 +58,43 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                         repolabel="Source"
                         repolink="https://github.com/routabeta/portfolio"
                         slug="./"
-   
                     /> 
+                    </div>
 
                     
                 </div>
             </div>
         </section>
+
+        <!-- Masonry layout -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.querySelector('.projects-grid');
+            let msnry = null;
+
+            function masonryInit() {
+                if (msnry) msnry.destroy();
+
+                msnry = new Masonry(grid, {
+                itemSelector: '.grid-item',
+                columnWidth: '.grid-sizer',
+                gutter: 20,
+                percentPosition: true
+                });
+                msnry.layout();
+            }
+
+            
+            imagesLoaded(grid, () => {
+                masonryInit();
+            })
+            
+
+            window.addEventListener('resize', () => {
+                masonryInit();
+            });
+        });
+        </script>
 
   
 

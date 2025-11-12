@@ -38,8 +38,8 @@ const {
             )}
 
             <div class="overlay-interest-links">
-              {demolink && (
-                <a
+              {demolink.length > 0 && (
+                <button
                   class="btn"
                   href={demolink}
                   target="_blank"
@@ -47,10 +47,10 @@ const {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {demolabel}
-                </a>
+                </button>
               )}
-              {repolink && (
-                <a
+              {repolink.length > 0 && (
+                <button
                   class="btn btn-ghost"
                   href={repolink}
                   target="_blank"
@@ -58,7 +58,7 @@ const {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {repolabel}
-                </a>
+                </button>
               )}
             </div>
           </div>

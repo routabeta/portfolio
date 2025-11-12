@@ -239,6 +239,7 @@ button:hover {
   padding: 0.75rem 2rem;
   margin: 1rem 3rem;
   top: 5px;
+  left: 0;
   z-index: 10;
 }
 
@@ -246,6 +247,7 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  left: 0;
 }
 
 #theme-toggle {
@@ -277,9 +279,12 @@ button:hover {
     background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -1px;
     width: 100%;
     padding: 1rem 0;
+    /* border mesh with top navbar */
+    border: 1px solid var(--color-accent-line); 
+    border-top: none;
     border-radius: 0 0 1rem 1rem;
   }
 
@@ -293,14 +298,21 @@ button:hover {
   }
 
   /* When menu is active */
+
+  .navbar.active {
+    /* border mesh with top navbar */
+    border-bottom: none;
+    border-radius: 1rem 1rem 0rem 0rem;
+  }
+
   .navbar.active .nav-links {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 1rem;
-    animation: fadeDown 0.3s ease;
+    animation: fadeDown 0.3s ease forwards;
   }
+
   @keyframes fadeDown {
     from {
       opacity: 0;
@@ -382,7 +394,7 @@ button:hover {
 }
 
 .page-inner {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -402,30 +414,34 @@ button:hover {
   opacity: 0.92;
 }
 
-.project-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
-  break-inside: avoid;
-}
-
-@media (max-width: 600px) {
-  .project-grid {
-      grid-template-columns: repeat(1, minmax(250px, 1fr));
-  }
+.projects-grid {
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* ---------------- Project Card ---------------- */
+
+
+
+.grid-item, .grid-sizer {
+  width: calc(50% - 12px);
+}
+
+
+@media (max-width: 800px) {
+  .grid-item, .grid-sizer {
+    width: 100%;
+  }
+}
+
 .project-card {
   break-inside: avoid;
   margin-bottom: 1rem;
-
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 180px;
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -444,18 +460,21 @@ button:hover {
 .btn {
   display: inline-block;
   padding: 0.4rem 0.75rem;
+  border: none;
   border-radius: 0.375rem;
   background: var(--color-primary);
   color: #fff;
   text-decoration: none;
   font-size: 0.9rem;
   transition: background 0.3s ease;
+  z-index: 100;
 }
 
 .btn-ghost {
   background: transparent;
   color: #fff;
   border: 1px solid #fff;
+  z-index: 100;
 }
 
 .btn:hover,
@@ -504,6 +523,17 @@ button:hover {
 
 .card-link:hover .card-overlay {
   opacity: 1;
+}
+
+.card-link:hover{
+  /* Only grey out normal links, not this one */
+  opacity: 1; 
+}
+
+@media (max-width: 800px) {
+  .card-overlay {
+    opacity: 1;
+  }
 }
 
 .card-image {
@@ -587,9 +617,9 @@ button:hover {
 }
 
 .card-title {
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin: 0;
+  margin-bottom: 0.5rem;
   color: var(--color-text);
 }
 
@@ -600,7 +630,7 @@ button:hover {
 }
 
 .tech-item {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(120, 120, 120, 0.2);
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   font-size: 0.8rem;
