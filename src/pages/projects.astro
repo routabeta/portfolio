@@ -12,7 +12,7 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
             <div class="page-inner ">
                 <header class="projects-header">
                     <h1>Projects</h1>
-                    <p class="lead">Here are a few of the projects I've worked on!</p>
+                    <p class="lead">Here are a few of the projects I've worked on! Click on the project card to read more about each one!</p>
                 </header>
 
                 <div class="project-grid">
@@ -28,6 +28,28 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                     /> -->
 
                     <ProjectCardImageLink
+                        title="Killswitch PCB"
+                        description="Hall-effect sensor PCB for autonomous submarines to ensure diver safety." 
+                        tech={["Altium Designer", "PCB Assembly"]}
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+                        image="./killswitch_pcb_raw.png"
+                        imagealt="Killswitch PCB"
+                    /> 
+
+                    <ProjectCardImageLink
+                        title="Killswitch PCB"
+                        description="Hall-effect sensor PCB for autonomous submarines to ensure diver safety." 
+                        tech={["Altium Designer", "PCB Assembly"]}
+                        demolink="#"
+                        demolabel="Demo"
+                        slug="example-project-two"
+                        image="./killswitch_pcb_raw.png"
+                        imagealt="Killswitch PCB"
+                    /> 
+
+                     <ProjectCardImageLink 
                         title="IMAGE link"
                         description="Another small project demonstrating data processing and visualization." 
                         tech={["Python", "D3"]}
@@ -39,33 +61,9 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
                         image="/favicon.svg"
                         imagealt="Default Ico"
                     /> 
-
-                     <ProjectCardImageLink
-                        title="IMAGE link"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-                        image="/favicon.svg"
-                        imagealt="Default Ico"
-                    /> 
                     
-                    
-                    <ProjectCardImage
-                        title="IMAGE nolink"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        image="/github.svg"
-                        imagealt="Default Ico"
-                    />
-                    <ProjectCardLink
+                
+                    <ProjectCardLink 
                         title="NOKIMAGE link"
                         description="Another small project demonstrating data processing and visualization." 
                         tech={["Python", "D3"]}
@@ -77,44 +75,22 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
    
                     /> 
 
-                    <ProjectCardImage
-                        title="IMAGE nolink"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        image="/github.svg"
-                        imagealt="Default Ico"
-                    />
-                    <ProjectCardLink
-                        title="NOKIMAGE link"
-                        description="Another small project demonstrating data processing and visualization." 
-                        tech={["Python", "D3"]}
-                        repolabel="Source"
-                        repolink="#"
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-   
-                    /> 
-
-                    
-
-
-                    <!-- <ProjectCard
+      
+                    <ProjectCardLink class="grid"
                         title="Portfolio Website"
-                        description="My Built with a focus on maintainable structure and clean UI/UX."
-                        tech={["Astro", "JavaScript", "CSS"]}
-                        demolabel="Homepage"
-                        demolink="/"
+                        description="Astro site built with a focus on clean UI/UX to show a bit of who I am!" 
+                        tech={["Astro", "HTML", "CSS", "JS", "Markdown"]}
                         repolabel="Source"
                         repolink="https://github.com/routabeta/portfolio"
-                    /> -->
+                        slug="./"
+   
+                    /> 
+
+                    
                 </div>
             </div>
         </section>
+
   
 
 </BaseLayout>

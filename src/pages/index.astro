@@ -12,14 +12,83 @@ import ParticleBackground from "../components/ParticleBackground.astro";
 
   <section class="landing-page flex flex-col items-center text-center py-8">
     <div class="page-inner flex flex-col items-center text-center py-8">
-    <h1 >Luke Concini</h1>
-    
-    <p> Hi! My name is Luke, and I am an Engineering Physics Co-op student at the <a href="https://www.ualberta.ca/en/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>.
+      <!-- Terminal-esque front -->
+      <div class="terminal">
+        <span class="prompt">$</span>
+        <span id="typed-text"></span>
+        <span class="cursor">_</span>
+      </div>
+
       
-        problem solving, climbing and mountians, baking, engg projects (robotics, circuits) physics coding
-      
+      <p class="about-me"> Hi! My name is Luke, and I'm a 2nd-year Engineering Physics Co-op student at the <a href="https://www.ualberta.ca/en/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>.
+        I really enjoy solving a beautiful math or physics problem, as well as learning about circuits and robotics.
+        When I'm not tinkering with engg projects, you can find me climbing, enjoying the outdoors, or listening to music.
+      </p>
+
     </div>
   </section>
+
+  <script>
+    
+    
+    const textArray = [
+      "echo 'Hi, I'm Luke Concini'",
+      "nvim ./BSc_Engineering_Physics/",
+      "cat interests.tex | grep 'climbing'",
+      "cat interests.tex | grep 'classical music'",
+      "cat interests.tex | grep 'baking'",
+      "echo 'Welcome to my portfolio!'",
+    ];
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let typingSpeed = 70;
+
+    const typedText = document.getElementById('typed-text');
+    const cursor = document.querySelector('.cursor');
+
+    function type() {
+      if (charIndex < textArray[textIndex].length) {
+        typedText.textContent += textArray[textIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingSpeed);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+
+    function erase() {
+      let next_start_char = commonPrefixLength(textArray[(textIndex + 1) % textArray.length], textArray[textIndex]);
+      if (charIndex > next_start_char ) {
+        typedText.textContent = textArray[textIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 35);
+      } else {
+        textIndex = (textIndex + 1) % textArray.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    function commonPrefixLength(str1, str2) {
+      let length = 0;
+      const minLength = Math.min(str1.length, str2.length);
+
+      for (let i = 0; i < minLength; i++) {
+        if (str1[i] === str2[i]) {
+          length++;
+        } else {
+          break;
+        }
+      }
+
+      return length;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      type();
+    });
+
+  </script>
   
 
 </BaseLayout>

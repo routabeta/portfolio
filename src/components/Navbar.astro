@@ -4,14 +4,22 @@ const navLinks = [ // Here is the 'master' set of links to pages!!
   { name: "Projects", href: "/projects" },
   { name: "Contact", href: "/contact" },
 ];
+
+
 ---
  
 <nav class="navbar flex items-center justify-between sticky frosted">
   <a href="/">
   Luke Concini
   </a>
-  
-  <div class="justify-end">
+
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-links justify-end">
       {navLinks.map(link => (
       <a href={link.href}>
         {link.name}
@@ -20,12 +28,33 @@ const navLinks = [ // Here is the 'master' set of links to pages!!
 
   <!-- Dark mode toggle button -->
   <button
-    style="margin-left:1.5rem; padding:0.25rem 0.5rem; cursor:pointer;"
     id="theme-toggle"
     aria-label="Toggle theme"
   ></button>
 
   <script>
+
+    // Navbar hamburger menu
+    const navbar = document.querySelector('.navbar');
+    const toggle = document.getElementById('menu-toggle');
+
+    function handleToggle() {
+      if (window.innerWidth <= 700) {
+        navbar!.classList.toggle('active');
+      }
+    }
+
+    // Toggle when clicked (only on small screens)
+    toggle!.addEventListener('click', handleToggle);
+
+    // If window resizes larger, ensure menu closes automatically
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 700) {
+        navbar!.classList.remove('active');
+      }
+    });
+
+    // Navbar theme toggle
     (function(){
       const btn = document.getElementById('theme-toggle');
       const html = document.documentElement;
@@ -38,7 +67,7 @@ const navLinks = [ // Here is the 'master' set of links to pages!!
           `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 36 36" fill="currentColor"><g transform="translate(0, 0)"><path d="M18.44 34.68a18.22 18.22 0 0 1-2.94-.24 18.18 18.18 0 0 1-15-20.86A18.06 18.06 0 0 1 9.59.63 2.42 2.42 0 0 1 12.2.79a1.39 2.39 0 0 1 .85 3.1L11.9 3.1l1.23.22A15.66 15.66 0 0 0 23.34 21h0a15.82 15.82 0 0 0 8.47.53 2.44 2.44 0 0 1 2.58 2.5 18.18 18.18 0 0 1-18.44 10.65ZM10.67 2.89a15.67 15.67 0 0 0-5 22.77A15.66 15.66 0 0 0 32.18 24a18.49 18.49 0 0 1-9.65-.64A18.18 18.18 0 0 1 10.67 2.89Z"/></g></svg>`;
       }
 
-      // initialize icon
+      // initialize theme toggle icon
       document.addEventListener('DOMContentLoaded', () => {
         setIcon();
       });

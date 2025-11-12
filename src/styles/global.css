@@ -7,6 +7,8 @@
   --color-accent-line: rgb(181, 186, 254);
   --color-primary: rgb(59, 130, 246);
   --color-surface: rgb(220, 221, 249);
+
+  --color-terminal: #dd00ce;
 /*  background styles */
   --color-particle-background:rgb(248, 249, 251);
   --color-particles: rgb(231, 108, 174);
@@ -19,9 +21,11 @@
   /* --linear-grad: linear-gradient(to bottom right, rgb(24, 79, 230), rgb(227, 0, 243));  */
   --linear-grad: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(59, 17, 62)); 
   --color-text: rgb(241, 245, 249);
-  --color-accent-line: rgb(11, 1, 42);
+  --color-accent-line: rgb(38, 33, 58);
   --color-primary: rgb(96, 165, 250);
   --color-surface: rgb(17, 24, 39);
+
+  --color-terminal: #0aff8a;
   /* Particle background styles */
   --color-particle-background: rgb(0, 0, 0);
   --color-particles: rgb(255, 255, 255);
@@ -54,11 +58,14 @@ a {
   text-decoration: none;
   color: var(--color-primary);
   transition: color 0.4s;
+  font-weight: 600;
+  transition: opacity 0.2s ease-out; /* For ease-out */
 }
 
 a:hover,
 a:focus {
-  opacity: 0.8;
+  opacity: 0.4;
+  transition: opacity 0.2s ease-out;
 }
 
 button {
@@ -67,18 +74,13 @@ button {
   cursor: pointer;
   color: var(--color-text);
   font-size: 1rem;
+  transition: transform 0.2s linear;
 }
 
 button:hover {
-  opacity: 0.8;
-}
-
-/* ---------------- Landing page styles ---------------- */
-
-.landing-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
+  transform: scale(1.2);
+  transition: transform 0.2s linear;
+} 
 
 
 /* ---------------- Utility classes ---------------- */
@@ -97,9 +99,6 @@ button:hover {
 .font-bold { font-weight: bold; }
 .sticky { position: sticky;  z-index: 1000; }
 
-/* .frosted {
-  background-color: red;
-} */
 
 /* ---------------- Particle background transition style ---------------- */
 
@@ -135,6 +134,103 @@ button:hover {
   z-index: 0; /* above particles (z:-1), below everything else */
 }
 
+/* ---------------- Landing page styles ---------------- */
+
+
+/* Terminal container for bash-esque entry */
+.terminal {
+  font-family: 'Ubuntu Mono', monospace;
+  color: var(--color-terminal);
+  padding: 2rem;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+/* On smaller screens, make the text smaller */
+@media (max-width: 600px) {
+  .terminal {
+    font-size: 1.2rem;
+    min-height: 6rem;
+    /* Allow breaking long words */
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    /* Ensure terminal doesn’t force horizontal scroll */
+    max-width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+}
+
+
+/* The prompt ($) */
+.prompt {
+  margin: 0.5rem;
+  color: var(--color-terminal);
+}
+
+/* The blinking cursor */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  animation: blink 0.8s steps(1) infinite;
+  color: var(--color-terminal);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.about-me {
+  font-family: 'Ubuntu Mono', monospace;
+  color: var(--color-text);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+  line-height: 1.6;
+  max-width: 600px;
+  animation: slideUp 0.8s ease-out;
+  text-align: justify;
+}
+
+
+.about-me a {
+  color: var(--color-primary);
+  text-decoration: none;
+  position: relative;
+}
+
+.about-me a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1px;
+  background-color: var(--color-surface);
+  transition: width 0.3s ease;
+}
+
+.about-me a:hover::after {
+  width: 100%;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
+
+
 /* ---------------- Navbar styles ---------------- */
 .navbar {
   border: 1px solid var(--color-accent-line);
@@ -146,9 +242,77 @@ button:hover {
   z-index: 10;
 }
 
-.navbar a {
-  margin-left: 1.5rem;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
+
+#theme-toggle {
+  padding:0.25rem 0.5rem; 
+  cursor:pointer;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  pointer-events: none; /* prevent clicking when hidden */
+}
+
+.menu-toggle span {
+  height: 2px;
+  width: 25px;
+  background: var(--color-text);
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Small screen styles */
+@media (max-width: 700px) {
+  .nav-links {
+    display: none; /* hide links by default on small screens */
+    flex-direction: column;
+    background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .menu-toggle {
+    display: flex; /* show hamburger */
+    pointer-events: auto; /* make it clickable */
+  }
+
+  .menu-toggle:hover span {
+    background: var(--color-primary);
+  }
+
+  /* When menu is active */
+  .navbar.active .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    animation: fadeDown 0.3s ease;
+  }
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 
 /* ---------------- Footer styles ---------------- */
 .site-footer {
@@ -180,6 +344,7 @@ button:hover {
   gap: 0.75rem;
   align-items: center;
 }
+
 .social-link {
   color: var(--color-text);
   display: inline-flex;
@@ -187,18 +352,21 @@ button:hover {
   height: 28px;
   align-items: center;
   justify-content: center;
-  transition: color 0.18s ease, transform 0.12s ease;
+  transition: color 0.18s ease, transform 0.2s ease;
 }
+
 .social-link svg {
   width: 20px;
   height: 20px;
   display: block;
 }
+
 .social-link:hover,
 .social-link:focus {
   color: var(--color-primary);
   transform: translateY(-2px);
 }
+
 .footer-copy {
   font-size: 0.95rem;
   color: var(--color-text);
@@ -238,10 +406,7 @@ button:hover {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, minmax(250px, 1fr));
-  /* align-items:last space-between;  */
   break-inside: avoid;
-
-
 }
 
 @media (max-width: 600px) {
@@ -314,8 +479,6 @@ button:hover {
   text-decoration: none;
   color: inherit;
 }
-
-
 /* ---------------- Image & Overlay Styles ---------------- */
 
 .card-image-wrapper {
@@ -395,7 +558,7 @@ button:hover {
 }
 
 .overlay-tech-item {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(100, 100, 100, 0.75);
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   font-size: 0.8rem;
