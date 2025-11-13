@@ -24,7 +24,7 @@ const {
 
 
 <article class="project-card">
-  <a href={slug} class="card-link"> 
+  <a href={`/projects/${slug}`} class="card-link"> 
       <div class="card-image-wrapper">
         <img src={image} alt={imageAlt || title} class="card-image" />
         <div class="card-overlay">
@@ -37,32 +37,34 @@ const {
               </ul>
             )}
 
-            <div class="overlay-interest-links">
-              {demolink.length > 0 && (
-                <button
-                  class="btn"
-                  href={demolink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {demolabel}
-                </button>
-              )}
-              {repolink.length > 0 && (
-                <button
-                  class="btn btn-ghost"
-                  href={repolink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {repolabel}
-                </button>
-              )}
-            </div>
+              <div class="overlay-interest-links">
+                {demolink.length > 0 && (
+                  <a
+                    class="btn"
+                    href={demolink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {demolabel}
+                  </a>
+                )}
+                {repolink.length > 0 && (
+                  <a
+                    class="btn btn-ghost"
+                    href={repolink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {repolabel}
+                  </a>
+                )}
+              </div>
+            
           </div>
         </div>
       </div>
-</a>
+  </a>
+  
 </article>

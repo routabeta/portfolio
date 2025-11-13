@@ -15,14 +15,27 @@ Overview of repo structure:
 
 ```
 /
-├── public/            # Static assets
+├── public/                     # Static assets
 ├── src/
-│   ├── components/    # Reusable UI components
-│   ├── layouts/       # Page layouts
-│   ├── pages/         # Main site pages
-│   ├── styles/        # Global and component CSS
-└── astro.config.mjs   # Astro configuration
+│   ├── components/             # Reusable UI components following Astro conventions
+│   ├── content/                # Content collection
+│         ├── projects/         # Projects collection folder for [project].md files!
+│   ├── layouts/                # Page layouts
+│   ├── pages/                  # Main site pages
+│         ├── projects/         # Req routing page
+│               ├── [id].astro  # [id].astro statically 'builds' routes
+│   ├── styles/                 # CSS
+└── astro.config.mjs            # Astro configuration
 ```
+
+---
+
+## Adding a New Project Page
+
+1. Add a new markdown file:  `src/content/projects/[slug].md`
+- Ensure it follows the schema defined in `config.ts`
+- Again, ENSURE all the required stuff is present <3
+- Add all the content!
 
 ---
 

@@ -1,6 +1,11 @@
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
 export default defineConfig({
-  // You can add your configuration options here
+  integrations: [],
+  content: {
+    collections: {
+      blog: './src/content/projects',
+    },
+  },
+
 });

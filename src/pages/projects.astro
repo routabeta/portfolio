@@ -1,8 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCardImageLink from "../components/ProjectCardImageLink.astro";
-import ProjectCardImage from "../components/ProjectCardImage.astro";
-import ProjectCardLink from "../components/ProjectCardLink.astro";
+
+import { getCollection } from "astro:content";
+const projects = await getCollection("projects");
+
+// Sort by date so the projects are arranged oldest to newest!
+projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+if(!projects){
+  console.log("Projects not found!");
+  throw new Error(`Projects not found!`);
+}
 
 ---
 
@@ -11,7 +20,6 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
     <!-- Load masonry -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
 
         <section class="projects-page ">
             <div class="page-inner ">
@@ -22,47 +30,26 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
 
                 <!-- reference grid object for masonry layout -->
                
-
                 <div class="projects-grid">
-                     <div class="grid-sizer"></div>
-                    <!-- <ProjectCard
-                        title="Killswitch PCB"
-                        description="SMALL PROJECT DESC." 
-                        slug="example-project-two"
-                        tech={["Altium", "JLCPCB"]}
-                        demolabel="Homepage"
-                        demolink="/"
-                        repolabel="Source"
-                        repolink="https://github.com/routabeta/portfolio"
-                    /> -->
-
-                    <div class="grid-item">
-                    <ProjectCardImageLink
-                        title="Killswitch PCB"
-                        description="Hall-effect sensor PCB for autonomous submarines to ensure diver safety." 
-                        tech={["Altium Designer", "PCB Assembly"]}
-                        demolink="#"
-                        demolabel="Demo"
-                        slug="example-project-two"
-                        image="./killswitch_pcb_raw.png"
-                        imagealt="Killswitch PCB"
-                    /> 
-                    </div>
-
-      
-                    <div class="grid-item">
-                    <ProjectCardLink class="grid"
-                        title="Portfolio Website"
-                        description="Astro site built with a focus on clean UI/UX to show a bit of who I am!" 
-                        tech={["Astro", "HTML", "CSS", "JS", "Markdown"]}
-                        repolabel="Source"
-                        repolink="https://github.com/routabeta/portfolio"
-                        slug="./"
-                    /> 
-                    </div>
-
-                    
+                    <div class="grid-sizer"></div>
+                    {projects.map(project => (
+                        <div class="grid-item">
+                        <ProjectCardImageLink
+                        title={project.data.title}
+                        description={project.data.description}
+                        tech={project.data.tech || []}
+                        slug={project.data.slug}
+                        image={project.data.heroImage}
+                        imageAlt={project.data.heroAlt}
+                        demolink={project.data.demoLink}
+                        repolink={project.data.repoLink}
+                        />
+                        </div>
+                    ))}
                 </div>
+
+
+
             </div>
         </section>
 
@@ -86,7 +73,10 @@ import ProjectCardLink from "../components/ProjectCardLink.astro";
 
             
             imagesLoaded(grid, () => {
-                masonryInit();
+                setTimeout( () =>
+                {
+                    masonryInit();
+                }, 20);
             })
             
 

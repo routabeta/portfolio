@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404" description="I'm sorry, the page you are looking for does not exist :(">
+
+    <div style="display: flex; align-items: center; margin: 1rem 2rem; height: 100%;">
+      <!-- Terminal-esque front -->
+      <div class="terminal">
+        <span class="prompt">$</span>
+        <span id="typed-text"></span>
+        <span class="cursor">_</span>
+      </div>
+    </div>
+  
+       <script>
+    
+    
+   
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let typingSpeed = 100;
+    let eraseSpeed = 50;
+    let icmp_seq = 0;
+
+     const textArray = [
+      "ping error.4.0.4",
+      "icmp_seq=1 Destination Page Unreachable :("
+    ];
+
+    const typedText = document.getElementById('typed-text');
+    const cursor = document.querySelector('.cursor');
+
+    function type() {
+      if (charIndex < textArray[textIndex].length) {
+        typedText.textContent += textArray[textIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingSpeed);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0 ) {
+        typedText.textContent = textArray[textIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, eraseSpeed);
+      } else {
+        textIndex = (textIndex + 1) % textArray.length;
+        if(textIndex == 1){
+            icmp_seq += 1;
+            textArray[1] = "icmp_seq=" + icmp_seq + " Destination Page Unreachable :("
+            typingSpeed = 60;
+            eraseSpeed = 30;
+        } else {
+            typingSpeed = 100;
+            eraseSpeed = 50;
+        }
+        setTimeout(type, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      type();
+    });
+
+  </script>
+
+</BaseLayout>

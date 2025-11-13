@@ -9,7 +9,7 @@ let options: ISourceOptions = {
     },
     fullScreen: { zIndex: -1 },
     particles: {
-      number: { value: 90, density: { enable: true, area: 1000 } },
+      number: { value: 50, density: { enable: true, area: 1000 } },
       color: { value: "#ffffff" },
       shape: { type: "circle" },
       opacity: { value: 0.8, random: true },
@@ -28,7 +28,7 @@ let options: ISourceOptions = {
         random: true,
         straight: false,
         outModes: { default: "bounce" },
-        attract: { distance: 90, enable: true, rotateX: 100, rotateY: 900 },
+        attract: { distance: 110, enable: true, rotateX: 300, rotateY: 1200 },
       },
     },
     interactivity: {
@@ -139,7 +139,7 @@ let options: ISourceOptions = {
             container.options.background.color.value = isDark ? themes["--color-particle-background"].light : themes["--color-particle-background"].dark;
             container.options.particles.color.value = isDark ? themes["--color-particles"].light : themes["--color-particles"].dark;
             container.options.particles.links.color.value = isDark ? themes["--color-links"].light : themes["--color-links"].dark;
-            container.options.particles.move.speed = isDark ? 2.1 : 0.6;
+            container.options.particles.move.speed = isDark ? 1.4 : 0.4;
             
             container.refresh();
             
@@ -169,7 +169,7 @@ let options: ISourceOptions = {
     container.options.background.color.value = wasDark ? themes["--color-particle-background"].light : themes["--color-particle-background"].dark;
     container.options.particles.color.value = wasDark ? themes["--color-particles"].light : themes["--color-particles"].dark;
     container.options.particles.links.color.value = wasDark ? themes["--color-links"].light : themes["--color-links"].dark;
-    container.options.particles.move.speed = wasDark ? 2.1 : 0.6;
+    container.options.particles.move.speed = wasDark ? 1.4 : 0.4;
     container.refresh();
 
         // Fade the overly div from old colour and opaque to new colour and transparent

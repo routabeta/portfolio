@@ -1,6 +1,5 @@
 /* ---------------- Dark/Light mode palatte ---------------- */
 :root {
-  /* Solid Background and Accent Gradient - adjust opacity of background for style! */
   --color-background: rgb(238, 239, 249); 
   --linear-grad: linear-gradient(to bottom right, rgb(221, 219, 227), rgb(226, 179, 230));  
   --color-text: rgb(20, 28, 40);
@@ -11,15 +10,14 @@
   --color-terminal: #dd00ce;
 /*  background styles */
   --color-particle-background:rgb(248, 249, 251);
-  --color-particles: rgb(231, 108, 174);
+  --color-particles: rgb(218, 67, 148);
   --color-links: rgb(136, 136, 255);
 }
 
 .dark {
-  /* Solid Background and Accent Gradient - adjust opacity of background for style! */
-  --color-background: rgb(0, 0, 0);
+  --color-background: rgb(4, 0, 17);
   /* --linear-grad: linear-gradient(to bottom right, rgb(24, 79, 230), rgb(227, 0, 243));  */
-  --linear-grad: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(59, 17, 62)); 
+  --linear-grad: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(45, 12, 48)); 
   --color-text: rgb(241, 245, 249);
   --color-accent-line: rgb(38, 33, 58);
   --color-primary: rgb(96, 165, 250);
@@ -34,7 +32,12 @@
 
 /* Transition */
 html {
-  transition: background-color 0.4s, color 0.4s;
+  transition: background-color 0.4s, color 0.4s;  
+}
+
+/* Reduce FOUC */
+html.fouc-prevent {
+  visibility: hidden;
 }
 
 .no-transition *,
@@ -59,7 +62,7 @@ a {
   color: var(--color-primary);
   transition: color 0.4s;
   font-weight: 600;
-  transition: opacity 0.2s ease-out; /* For ease-out */
+  transition: opacity 0.2s ease-out; /* For ease-out when de-hover */
 }
 
 a:hover,
@@ -81,6 +84,12 @@ button:hover {
   transform: scale(1.2);
   transition: transform 0.2s linear;
 } 
+
+.project-content {
+  /* display: flex; */
+  /* justify-content: center; */
+  align-items: center;
+}
 
 
 /* ---------------- Utility classes ---------------- */
@@ -106,7 +115,7 @@ button:hover {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -3; /* behind particle canvas (-1) and overlay (0) */
+  z-index: -3; /* behind particle canvas z=-1 and overlay z=0 */
 }
 
  #particle-gradient {
@@ -165,7 +174,7 @@ button:hover {
 }
 
 
-/* The prompt ($) */
+/* The terminal-esque prompt $ */
 .prompt {
   margin: 0.5rem;
   color: var(--color-terminal);
@@ -297,6 +306,7 @@ button:hover {
     background: var(--color-primary);
   }
 
+
   /* When menu is active */
 
   .navbar.active {
@@ -384,6 +394,68 @@ button:hover {
   color: var(--color-text);
 }
 
+/* ---------------- Single Project page  ---------------- */
+
+.project-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Hero styles */
+.hero {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+article {
+  background-color: var(--color-surface);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+article h1, article h2, article h3 {
+  color: var(--color-text);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+article p {
+  margin-bottom: 1em;
+}
+
+article img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1em 0;
+}
+
+article ul, article ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+article blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1em;
+  color: #666;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+
+
 
 /* ---------------- Projects page  ---------------- */
 .projects-page {
@@ -458,6 +530,7 @@ button:hover {
 /* ---------------- Buttons ---------------- */
 
 .btn {
+  position: relative;
   display: inline-block;
   padding: 0.4rem 0.75rem;
   border: none;
@@ -468,6 +541,7 @@ button:hover {
   font-size: 0.9rem;
   transition: background 0.3s ease;
   z-index: 100;
+  pointer-events: auto;
 }
 
 .btn-ghost {
@@ -495,6 +569,7 @@ button:hover {
   display: block;
   position: relative;
   max-width: 100%;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -526,7 +601,7 @@ button:hover {
 }
 
 .card-link:hover{
-  /* Only grey out normal links, not this one */
+  /* Only grey out normal links, add style here so not inherit for this one */
   opacity: 1; 
 }
 
