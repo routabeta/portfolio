@@ -91,6 +91,20 @@ button:hover {
   align-items: center;
 }
 
+.project-post {
+  font-family: "Verdana", sans-serif;
+}
+
+.project-post-interest-links {
+  display: flex;
+  width: auto;
+  margin: 1rem;
+  justify-content: center;
+  gap: 1rem;    
+  font-size: 2rem;         
+}
+
+
 
 /* ---------------- Utility classes ---------------- */
 .flex { display: flex; }

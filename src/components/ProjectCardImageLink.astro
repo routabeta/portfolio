@@ -5,8 +5,8 @@ const {
   tech = [],
   demolabel = 'Demo',
   repolabel = 'Source',
-  demolink = '',
-  repolink = '',
+  demoLink = '',
+  repoLink = '',
   slug = '',
   image = '',
   imageAlt = '',
@@ -16,8 +16,8 @@ const {
 // USAGE
 // Mandatory 'title' and 'description'
 // Any 'tech' labels will show the various skills/tools used
-// Providing a 'demolink' and 'demolabel' will create a demo button
-// Providing a 'repolink' and 'repolabel' will create a source code button
+// Providing a 'demoLink' and 'demolabel' will create a demo button
+// Providing a 'repoLink' and 'repolabel' will create a source code button
 // Providing 'slug' will make the card act as a link to a project page
 // Adding 'image' and 'imageAlt' will create and image overlay
 --- 
@@ -45,28 +45,28 @@ const {
   </a>
 
   <div class="overlay-interest-links">
-                {demolink.length > 0 && (
-                  <a
-                    class="btn"
-                    href={demolink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {demolabel}
-                  </a>
-                )}
-                {repolink.length > 0 && (
-                  <a
-                    class="btn btn-ghost"
-                    href={repolink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {repolabel}
-                  </a>
-                )}
-              </div>
-  
+    {demoLink.length > 0 && (
+      <a
+        class="btn"
+        href={demoLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {demolabel}
+      </a>
+    )}
+    {repoLink.length > 0 && (
+      <a
+        class="btn btn-ghost"
+        href={repoLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {repolabel}
+      </a>
+    )}
+  </div>
+
 </article>

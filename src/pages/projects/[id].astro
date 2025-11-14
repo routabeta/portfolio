@@ -15,8 +15,15 @@ const { Content } = await render(project);
 
 ---
 
-<ProjectLayout title={project.data.title} desc={project.data.description} heroImage={project.data.heroImage} heroAlt={project.data.heroAlt}>
-  <article>
+<ProjectLayout 
+itle={project.data.title} 
+desc={project.data.description} 
+heroImage={project.data.heroImage} 
+heroAlt={project.data.heroAlt}
+demoLink={project.data.demoLink}
+repoLink={project.data.repoLink}
+>
+  <article class="project-post">
     <h1>{project.data.title}</h1>
     <Content/>
   </article>

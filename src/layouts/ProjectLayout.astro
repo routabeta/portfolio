@@ -3,7 +3,10 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro";
 
-const { title = "Project", description = "", heroImage = "", heroAlt = "" } = Astro.props;
+const { title = "Project", description = "", heroImage = "", heroAlt = "" , demoLink="", repoLink=""} = Astro.props;
+
+const   demolabel = 'Check out a demo!';
+const repolabel = 'See the source code.';
 ---
 
 <html lang="en" class="fouc-prevent">
@@ -64,6 +67,32 @@ const { title = "Project", description = "", heroImage = "", heroAlt = "" } = As
             <img src={heroImage} alt={heroAlt || title} />
           </div>
         )}
+
+        <div class="project-post-interest-links">
+          {demoLink.length > 0 && (
+            <a
+              class="btn"
+              href={demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {demolabel}
+            </a>
+          )}
+          {repoLink.length > 0 && (
+            <a
+              class="btn btn-ghost"
+              href={repoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {repolabel}
+            </a>
+          )}
+        </div>
+        
 
         <slot />
       </div>
