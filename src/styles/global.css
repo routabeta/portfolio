@@ -113,6 +113,7 @@ button:hover {
 
 #particle-wrapper {
   position: fixed;
+  height: auto;
   inset: 0;
   pointer-events: none;
   z-index: -3; /* behind particle canvas z=-1 and overlay z=0 */
@@ -153,13 +154,26 @@ button:hover {
   padding: 2rem;
   border-radius: 8px;
   display: inline-block;
-  font-size: 2rem;
+  font-size: 2.3rem;
+}
+
+.about-me {
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+  line-height: 1.6;
+  width: 100%;
+  animation: slideUp 0.8s ease-out;
+  text-align: justify;
 }
 
 /* On smaller screens, make the text smaller */
 @media (max-width: 600px) {
   .terminal {
-    font-size: 1.2rem;
+    font-size: 1rem;
     min-height: 6rem;
     /* Allow breaking long words */
     white-space: pre-wrap; 
@@ -167,9 +181,13 @@ button:hover {
     overflow-wrap: break-word;
 
     /* Ensure terminal doesn’t force horizontal scroll */
-    max-width: 100%;
-    padding: 0.5rem;
+    width: 100%;
+    padding: 0.2rem;
     box-sizing: border-box;
+  }
+  
+  .about-me {
+    font-size: 1rem;
   }
 }
 
@@ -188,22 +206,15 @@ button:hover {
   color: var(--color-terminal);
 }
 
+#typed-text {
+  width: 100%;
+  min-height: 5rem;
+}
+
 @keyframes blink {
   50% {
     opacity: 0;
   }
-}
-
-.about-me {
-  font-family: 'Ubuntu Mono', monospace;
-  color: var(--color-text);
-  padding: 1rem 1.5rem;
-  margin: 1rem 0;
-  border-radius: 6px;
-  line-height: 1.6;
-  max-width: 600px;
-  animation: slideUp 0.8s ease-out;
-  text-align: justify;
 }
 
 
@@ -250,6 +261,8 @@ button:hover {
   top: 5px;
   left: 0;
   z-index: 10;
+
+  backdrop-filter: blur(3px);
 }
 
 .nav-links {
@@ -425,7 +438,11 @@ article {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-article h1, article h2, article h3 {
+article h1 {
+  color: var(--color-terminal);
+}
+
+article h2, article h3 {
   color: var(--color-text);
   margin-top: 1.5em;
   margin-bottom: 0.5em;
@@ -438,7 +455,6 @@ article p {
 article img {
   max-width: 100%;
   border-radius: 8px;
-  margin: 1em 0;
 }
 
 article ul, article ol {
@@ -459,14 +475,13 @@ article blockquote {
 
 /* ---------------- Projects page  ---------------- */
 .projects-page {
-  padding: 2rem, 0, 4rem, 0; 
+  padding: 2rem 0 4rem 0; 
   background-color: var(--color-background); 
   transition: background-color 0.4s, color 0.4s;
-  z-index: 1;  
 }
 
 .page-inner {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -494,7 +509,6 @@ article blockquote {
 /* ---------------- Project Card ---------------- */
 
 
-
 .grid-item, .grid-sizer {
   width: calc(50% - 12px);
 }
@@ -512,14 +526,18 @@ article blockquote {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow: visible;
+  height: auto;
+  min-height: fit-content;
+
+  /* justify-content: center; */
+  /* align-items: center; */
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   background-color: var(--color-surface);
   transition: transform 0.3s linear, box-shadow 0.3s ease;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .project-card:hover {
@@ -536,7 +554,7 @@ article blockquote {
   border: none;
   border-radius: 0.375rem;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-text);
   text-decoration: none;
   font-size: 0.9rem;
   transition: background 0.3s ease;
@@ -546,21 +564,21 @@ article blockquote {
 
 .btn-ghost {
   background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
   z-index: 100;
 }
 
 .btn:hover,
 .btn:focus-visible {
-  background: color-mix(in srgb, var(--color-primary) 90%, black);
+  background: color-mix(in srgb, var(--color-primary) 70%, black);
   transform: scale(1.03);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn-ghost:hover,
 .btn-ghost:focus-visible {
-  background: color-mix(in srgb, var(--color-primary) 20%, black);
+  background: color-mix(in srgb, var(--color-primary) 70%, black);
   transform: scale(1.03);
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -572,14 +590,15 @@ article blockquote {
   height: 100%;
   text-decoration: none;
   color: inherit;
+  font-weight: normal;
 }
 /* ---------------- Image & Overlay Styles ---------------- */
 
 .card-image-wrapper {
+  display: block;
   width: 100%;
-  position: relative;
+  height: auto;
   border-radius: 0.5rem;
-  overflow: hidden;
   background-color: var(--color-surface);
 }
 
@@ -587,13 +606,15 @@ article blockquote {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-  display: flex;
+  height: auto;
   justify-content: center;
   align-items: center;
   background: rgba(20, 20, 20, 0.4);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition:
+   opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 0.5rem;
+  overflow: auto;
 }
 
 .card-link:hover .card-overlay {
@@ -612,8 +633,9 @@ article blockquote {
 }
 
 .card-image {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   transition: filter 0.3s ease, transform 0.3s ease;
 }
@@ -624,6 +646,7 @@ article blockquote {
 }
 
 .project-card:hover .card-overlay {
+  transform: scale(1.05);
   opacity: 1;
 }
 
@@ -631,24 +654,25 @@ article blockquote {
   width: 100%;        
   max-width: 600px;   
   text-align: center;
-  padding: 1rem;
+  padding: 1.8rem 1rem;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center; 
-  gap: 0.5rem;
-
+  box-sizing: border-box;
 }
 
 .overlay-title {
   font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
   color: #fff;
+  margin: 0.5rem 0rem 0.5rem 0rem;
 }
 
 
 .overlay-desc {
-  margin: 0 0 0.75rem 0;
+  margin: 0.75rem;
   color: #fff;
 }
 
@@ -673,49 +697,7 @@ article blockquote {
 .overlay-interest-links {
   display: flex;
   width: auto;
+  margin: 0.5rem 0rem 0rem 0rem;
   justify-content: center;
   gap: 0.4rem;             
 }
-
-/* ---------------- Default card ---------------- */
-
-.card-content {
-  max-width: 600px;   
-  text-align: center;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--color-text);
-}
-
-.card-desc {
-  margin: 0 0 0.75rem 0;
-  color: var(--color-text);
-  flex-grow: 1;
-}
-
-.tech-item {
-  background: rgba(120, 120, 120, 0.2);
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  color: var(--color-text);
-}
-
-.interest-links {
-  display: flex;
-  width: auto;
-  justify-content: center;
-  gap: 0.4rem;             
-}
-

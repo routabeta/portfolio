@@ -43,13 +43,10 @@ let options: ISourceOptions = {
     },
     retina_detect: true,
   };
-
-
 ---
 
 <script>
     
-
     import { type Container, type Engine } from "tsparticles-engine";
     import { loadFull } from "tsparticles";
 
@@ -65,38 +62,7 @@ let options: ISourceOptions = {
     window.particlesLoaded = function (container: Container) {
         console.log("particlesLoaded callback");
     
-
     }
-
-    // read themes from css for dynamc switching
-    // function getThemeVars(varNames: string[]) {
-    //     const sheets = Array.from(document.styleSheets) as CSSStyleSheet[];
-    //     const result: Record<string, { light?: string; dark?: string }> = {};
-
-    //     varNames.forEach((varName) => {
-    //         result[varName] = { light: undefined, dark: undefined };
-
-    //   sheets.forEach((sheet) => {
-    //     try {
-    //       Array.from(sheet.cssRules).forEach((rule: CSSRule) => {
-    //         if (!(rule instanceof CSSStyleRule)) return;
-
-    //         if (rule.selectorText === ":root") {
-    //           const val = rule.style.getPropertyValue(varName).trim();
-    //           if (val) result[varName].light = val;
-    //         } else if (rule.selectorText === ".dark") {
-    //           const val = rule.style.getPropertyValue(varName).trim();
-    //           if (val) result[varName].dark = val;
-    //         }
-    //       });
-    //     } catch (e) {
-    //       // ignore cross-origin stylesheets
-    //     }
-    //   });
-    // });
-
-    // return result;
-    // }
 
     function getThemeVars(varNames) {
       const root = document.documentElement;
@@ -116,7 +82,6 @@ let options: ISourceOptions = {
       document.body.removeChild(darkProbe);
       return result;
     }
-
 
   const themes = getThemeVars([
     "--color-particle-background",
