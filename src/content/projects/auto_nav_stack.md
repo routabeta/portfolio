@@ -4,7 +4,7 @@ description: A ROS 2 obstacle-avoiding autonomous path planning and movement sta
 date: 2025-06-01
 tech: ["ROS 2", "Rviz", "Python", "Gazebo", "Algorithmics"]
 slug: auto_nav_stack
-heroImage: /navigation_stack_sim.png
+heroImage: /src/assets/navigation_stack_sim.png
 heroAlt: Simulation of the navigation stack
 demoLink: https://www.youtube.com/watch?v=1rhpwK2Dbc8
 ---
@@ -36,8 +36,10 @@ My motivation for this project was that, in testing, I found the nav2 package fo
 Before even starting the stack, my work with the Jackal UGV encompassed upgrading the robot as well as developing the navigation demo. First, I had to upgrade and reconfigure the Jackal's system for ROS2. I reflashed a Jetson Xavier and rebuilt the Clearpath Robotics driver stack from ROS Noetic into ROS2 Foxy. I then had to reintegrate sensors like the Velodyne VLP 16 LiDAR into the robot's URDF and simulated environment. I also built a Docker Compose environment to facilitate development in a dependency-isolated environment, among other things.
 
 I began the design of the ROS 2 system by outlining my node structure and creating a system planner:
+<!-- 
+<img src="/motion_planner_system.png" alt="System hierarchy of the navigation stack" width="80%" loading="lazy"/> -->
+![System hierarchy of the navigation stack](/src/assets/motion_planner_system.png)
 
-<img src="/motion_planner_system.png" alt="System hierarchy of the navigatio stack" width="80%" loading="lazy"/>
 
 I am quite proud of the algorithmic design that went into the stack.
 
@@ -98,7 +100,8 @@ I am quite proud of the algorithmic design that went into the stack.
 
 Here is a visualization of the global path planning for an object that seeks to travel from the bottom left to the top right corners of the map. Demonstrated is the effect that different amounts of downsampling has on the path. Given a map with obstacles, we run Dijkstra on a costmap built from obstacle distance and goal distance (although simple obstacle-avoiding Dijkstra is shown here). we then downsample the path, meaning we omit data points while attempting to preserve the essential characteristics of the path. Finally, we smooth the path with cubic spline interpolation.
 
-<img src="/cubic_spline_downsampling_demo.png" alt="Demo using Matplotlib of cubic spline path smoothing technique" width="80%" loading="lazy"/>
+![Demo using Matplotlib of cubic spline path smoothing technique](/src/assets/cubic_spline_downsampling_demo.png)
+<!-- <img src="/cubic_spline_downsampling_demo.png" alt="Demo using Matplotlib of cubic spline path smoothing technique" width="80%" loading="lazy"/> -->
 
 We notice there is a balance between accuracy and smoothness. Minimal downsampling retains the exact characteristics of the path at the cost of little smoothing. Too much, however, results in a path that loosely follows Dijkstra while straying near obstacles in generous loops.
 

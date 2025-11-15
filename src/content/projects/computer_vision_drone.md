@@ -4,7 +4,7 @@ description: A ROS 2-enabled drone for centralized computer vision research.
 date: 2025-08-01
 tech: ["ROS 2", "C++", "Solidworks"]
 slug: computer_vision_drone
-heroImage: /drone_still.png
+heroImage: /src/assets/drone_still.png
 heroAlt: Image of the drone hovering
 demoLink: https://www.youtube.com/watch?v=gomUQwkU3bQ
 ---

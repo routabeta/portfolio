@@ -4,7 +4,7 @@ description: A unique wind turbine prototype.
 date: 2025-04-01
 tech: ["Solidworks", "Git"]
 slug: wind_turbine
-heroImage: /turbine_side_shot.png
+heroImage: /src/assets/turbine_side_shot.png
 heroAlt: An image of our turbine
 demoLink: https://www.youtube.com/watch?v=mu46Dmwamd0
 ---
@@ -15,7 +15,8 @@ A group of four of my friends and I built a unique wind turbine prototype as par
 
 | Our turbine in action | Team shot 1 | Team shot 2 |
 |--|--|--|
-|<img src="/turbine_running.png" alt="Wind turbine running" width="100%" loading="lazy"/>|<img src="/team_shot1.png" alt="Team in action" width="100%" loading="lazy"/>|<img src="/team_shot2.png" alt="Team in action" width="100%" loading="lazy"/>|
+|![Wind turbine running](/src/assets/turbine_running.png)|![Team in action](/src/assets/team_shot1.png)|![Team in action](/src/assets/team_shot2.png)|
+<!-- |<img src="/turbine_running.png" alt="Wind turbine running" width="100%" loading="lazy"/>|<img src="/team_shot1.png" alt="Team in action" width="100%" loading="lazy"/>|<img src="/team_shot2.png" alt="Team in action" width="100%" loading="lazy"/>| -->
 
 I'd like to thank Favour Abimbola, as well as the Engineering Student's Society, for the great photos!
 

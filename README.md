@@ -17,6 +17,7 @@ Overview of repo structure:
 /
 ├── public/                     # Static assets
 ├── src/
+│   ├── assets/                 # Image storage for optimization
 │   ├── components/             # Reusable UI components following Astro conventions
 │   ├── content/                # Content collection
 │         ├── projects/         # Projects collection folder for [project].md files!

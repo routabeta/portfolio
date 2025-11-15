@@ -89,10 +89,22 @@ button:hover {
   /* display: flex; */
   /* justify-content: center; */
   align-items: center;
+  overflow-wrap: break-word;
 }
+
 
 .project-post {
   font-family: "Verdana", sans-serif;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table th, table td {
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .project-post-interest-links {
@@ -168,7 +180,7 @@ button:hover {
   padding: 2rem;
   border-radius: 8px;
   display: inline-block;
-  font-size: 2.3rem;
+  font-size: 2rem;
 }
 
 .about-me {
@@ -182,27 +194,6 @@ button:hover {
   width: 100%;
   animation: slideUp 0.8s ease-out;
   text-align: justify;
-}
-
-/* On smaller screens, make the text smaller */
-@media (max-width: 600px) {
-  .terminal {
-    font-size: 1rem;
-    min-height: 6rem;
-    /* Allow breaking long words */
-    white-space: pre-wrap; 
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-
-    /* Ensure terminal doesn’t force horizontal scroll */
-    width: 100%;
-    padding: 0.2rem;
-    box-sizing: border-box;
-  }
-  
-  .about-me {
-    font-size: 1rem;
-  }
 }
 
 
@@ -307,61 +298,6 @@ button:hover {
   transition: 0.3s;
 }
 
-/* Small screen styles */
-@media (max-width: 700px) {
-  .nav-links {
-    display: none; /* hide links by default on small screens */
-    flex-direction: column;
-    background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
-    position: absolute;
-    top: 100%;
-    left: -1px;
-    width: 100%;
-    padding: 1rem 0;
-    /* border mesh with top navbar */
-    border: 1px solid var(--color-accent-line); 
-    border-top: none;
-    border-radius: 0 0 1rem 1rem;
-  }
-
-  .menu-toggle {
-    display: flex; /* show hamburger */
-    pointer-events: auto; /* make it clickable */
-  }
-
-  .menu-toggle:hover span {
-    background: var(--color-primary);
-  }
-
-
-  /* When menu is active */
-
-  .navbar.active {
-    /* border mesh with top navbar */
-    border-bottom: none;
-    border-radius: 1rem 1rem 0rem 0rem;
-  }
-
-  .navbar.active .nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: fadeDown 0.3s ease forwards;
-  }
-
-  @keyframes fadeDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
 
 /* ---------------- Footer styles ---------------- */
 .site-footer {
@@ -372,12 +308,6 @@ button:hover {
   background-color: var(--color-surface);
   opacity: 0.5;
   z-index: 10;
-}
-
-@media (max-width: 1000px) {
-  .site-footer {
-    margin: 5%;
-  }
 }
 
 .footer-inner {
@@ -527,13 +457,6 @@ article blockquote {
   width: calc(50% - 12px);
 }
 
-
-@media (max-width: 800px) {
-  .grid-item, .grid-sizer {
-    width: 100%;
-  }
-}
-
 .project-card {
   break-inside: avoid;
   margin-bottom: 1rem;
@@ -640,11 +563,6 @@ article blockquote {
   opacity: 1; 
 }
 
-@media (max-width: 800px) {
-  .card-overlay {
-    opacity: 1;
-  }
-}
 
 .card-image {
   display: block;
@@ -714,4 +632,120 @@ article blockquote {
   margin: 0.5rem 0rem 0rem 0rem;
   justify-content: center;
   gap: 0.4rem;             
+}
+
+/* ---------------- Small-screen ---------------- */
+
+/* Change the terminal on smaller screens, make the text smaller */
+@media (max-width: 600px) {
+  .terminal {
+    font-size: 0.9rem;
+    min-height: 6rem;
+    /* Allow breaking long words */
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    /* Ensure terminal doesn’t force horizontal scroll */
+    width: 100%;
+    padding: 0.2rem;
+    box-sizing: border-box;
+  }
+  
+  .about-me {
+    font-size: 1rem;
+  }
+}
+
+/* Change indent size for markdown lists on project pages  */
+@media (max-width: 600px) {
+  ul, ol {
+    /* margin-left: -20px; */
+    padding-left: 0px;
+    list-style-position: outside;
+  }
+}
+
+
+/* Small screen styles for the hamburger bar */
+@media (max-width: 700px) {
+  .nav-links {
+    display: none; /* hide links by default on small screens */
+    flex-direction: column;
+    background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: 100%;
+    padding: 1rem 0;
+    /* border mesh with top navbar */
+    border: 1px solid var(--color-accent-line); 
+    border-top: none;
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .menu-toggle {
+    display: flex; /* show hamburger */
+    pointer-events: auto; /* make it clickable */
+  }
+
+  .menu-toggle:hover span {
+    background: var(--color-primary);
+  }
+
+
+  /* When menu is active */
+
+  .navbar.active {
+    /* border mesh with top navbar */
+    border-bottom: none;
+    border-radius: 1rem 1rem 0rem 0rem;
+  }
+
+  .navbar.active .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeDown 0.3s ease forwards;
+  }
+
+  @keyframes fadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Footer shrinkage */
+@media (max-width: 1000px) {
+  .site-footer {
+    margin: 5%;
+  }
+}
+
+/* 1 column projects page on mobile */
+@media (max-width: 800px) {
+  .grid-item, .grid-sizer {
+    width: 100%;
+  }
+  body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .card-overlay {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Always display project text on mobile */
+@media (max-width: 800px) {
+  .card-overlay {
+    opacity: 1;
+  }
 }

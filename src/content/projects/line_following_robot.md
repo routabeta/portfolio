@@ -4,7 +4,7 @@ description: A line following robot using an IR sensor, Elegoo Uno, and custom C
 date: 2024-09-01
 tech: ["Arduino", "C", "Solidworks", "Breadboarding", "PID control"]
 slug: line_following_robot
-heroImage: /line_following_robot.png
+heroImage: /src/assets/line_following_robot.png
 heroAlt: An image of my line following robot
 demoLink: https://www.youtube.com/watch?v=u8r43yeaL40
 ---
