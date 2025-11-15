@@ -11,13 +11,13 @@ demoLink: https://www.youtube.com/watch?v=u8r43yeaL40
 
 ## Project Overview
 
-I build an adaptive line following robot using an analog 5 IR sensor array and an Elegoo Uno R3. The robot calibrates for 5 seconds before moving, using collected IR values to build two confidence intervals around a given 'light' and 'dark' reading. This approach allows for dynamic, *fuzzy* sensing that can adapt do different lighting and colour environments.
+I built an adaptive line following robot using an analog 5 IR sensor array and an Elegoo Uno R3. The robot calibrates for 5 seconds before moving, using collected IR values to build two confidence intervals around a given 'light' and 'dark' reading. This approach allows for dynamic, *fuzzy* sensing that can adapt to different lighting and colour environments.
 
 ---
 
 ## Design Process
 
-I began by researching existing implementations of this project to find a hardware setup that balanced cost with performance. I settled on an IR array and a two-motor design, which would allor me to implement more sophisticated algorithms than a simple 'bang-bang' controller.
+I began by researching existing implementations of this project to find a hardware setup that balanced cost with performance. I settled on an IR array and a two-motor design, which would allow me to implement more sophisticated algorithms than a simple 'bang-bang' controller.
 
 I created mock CAD designs for each of the components in my project, like the motors and boards, so I could create an assembly to gauge fit. I prototyped the chassis and motor mounts in Solidworks, and 3D printed them at my local library.
 

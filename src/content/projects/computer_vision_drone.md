@@ -11,7 +11,7 @@ demoLink: https://www.youtube.com/watch?v=gomUQwkU3bQ
 
 # Project Overview
 
-The Mechatronic Systems Lab uses ROS2-compatible drones to support computer vision research, however the current model used by the lab has closed software and is no longer in in production.
+The Mechatronic Systems Lab uses ROS2-compatible drones to support computer vision research, however the current model used by the lab has closed software and is no longer in production.
 
 This project involved the research and development of a drone capable of supporting computer vision research in the Mechatronic Systems Lab. I used open-source hardware/software, custom-designed physical components in SolidWorks, and leveraged peripherals optimized for low-latency FPV drones to provide an economical and modular system. I configured and wrote firmware to optimize the ROS2 and video-streaming integration. In all, a new build of the drone from scratch costs almost 4x less than the retail price of the currently used drones.
 
@@ -20,7 +20,7 @@ Project aspects include:
 - Streaming 1080p 60fps video to a ground station for CV processing with ~160ms latency;
 - Propellor guard frame optimized for impact resistance and modular assembly/replacement;
 - Stable hover in-place/at altitude/in yaw using optical flow sensor + rangefinder when not receiving commands.
-- Detailed technical documetation for to enable future reproducing and improvements to the drone.
+- Detailed technical documentation for to enable future reproducing and improvements to the drone.
 
 
 Click on the image to see a hover demo!
@@ -43,7 +43,7 @@ This project involves building a cost-effective, reliable, and ROS2-compatible v
 
 I created detailed documentation on my research into part selection, compatibility, and ordering sheets, all for internal use. I also maintained an engineering logbook to track my process and design intentions throughout the process.
 
-As I desgined CAD models for the drone, I tested them in a Solidworks assembly and maintained a database of the useful files for future repairs or improvements.
+As I designed CAD models for the drone, I tested them in a Solidworks assembly and maintained a database of the useful files for future repairs or improvements.
 
 I customized a fork of Ardupilot firmware for the drone, calibrated and tuned PIDs and data filtering, and developed test scripts for the drone and image sending.
 

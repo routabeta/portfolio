@@ -12,7 +12,7 @@ demoLink: https://www.youtube.com/watch?v=b2iJv0at5Rs
 
 ## Project Overview
 
-I coded a browswer AI checkers game that using a Flask RESTful API and a minimax alogrithm.
+I coded a browser AI checkers game that uses a Flask RESTful API and a minimax algorithm.
 
 Check out the demo for a video of the game!
 

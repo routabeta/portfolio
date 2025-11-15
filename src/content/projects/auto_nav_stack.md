@@ -13,7 +13,7 @@ demoLink: https://www.youtube.com/watch?v=1rhpwK2Dbc8
 
 As part of my work in Dr. Martin Barczyk's Mechatronic Systems Lab, I created the **Jackal Nav** system for 2D path planning through obstacles with smooth navigation. I worked with a Clearpath Robotics Jackal UGV, equipped with a Velodyne VLP-16 LiDAR puck to create a decentralized point-to-point navigation system. 
 
-The stack uses Steve Macenski's [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) package to generate an occupancy grid of the room, to which I apply various processig techniques and planning algorithms to guarantee global convergence while maintaining intuitive local behaviour.
+The stack uses Steve Macenski's [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) package to generate an occupancy grid of the room, to which I apply various processing techniques and planning algorithms to guarantee global convergence while maintaining intuitive local behaviour.
 
 Project aspects include:
 - A multi-node package that communicates through the full ROS2 architecture of topics, services, and actions;
@@ -91,14 +91,14 @@ I am quite proud of the algorithmic design that went into the stack.
     - Convert remaining unknowns to obstacles for safety
     - Inflate grid for safe navigation using robot radius
 - On service call:
-  - Compute distance transform from goal to generate disatnce costmap
+  - Compute distance transform from goal to generate distance costmap
   - Compute obstacle-based transform to prioritize safe navigation
   - Normalize and multiply costmaps element-wise to fuse them
   - Plan lowest-cost path from start to goal
   - Use cubic splines to smooth a downsampled version of the path
   - Return smooth path and fused costmap in service response
 
-Here is a visualization of the global path planning for an object that seeks to travel from the bottom left to the top right corners of the map. Demonstrated is the effect that different amounts of downsampling has on the path. Given a map with obstacles, we run Dijkstra on a costmap built from obstacle distance and goal distance (although simple obstacle-avoiding Dijkstra is shown here). we then downsample the path, meaning we omit data points while attempting to preserve the essential characteristics of the path. Finally, we smooth the path with cubic spline interpolation.
+Here is a visualization of the global path planning for an object that seeks to travel from the bottom left to the top right corners of the map. Demonstrated is the effect that different amounts of downsampling has on the path. Given a map with obstacles, we run Dijkstra on a costmap built from obstacle distance and goal distance (although simple obstacle-avoiding Dijkstra is shown here). We then downsample the path, meaning we omit data points while attempting to preserve the essential characteristics of the path. Finally, we smooth the path with cubic spline interpolation.
 
 ![Demo using Matplotlib of cubic spline path smoothing technique](/cubic_spline_downsampling_demo.png)
 <!-- <img src="/cubic_spline_downsampling_demo.png" alt="Demo using Matplotlib of cubic spline path smoothing technique" width="80%" loading="lazy"/> -->
