@@ -4,7 +4,7 @@ description: A robotic claw arm designed to move plastic balls between to crates
 date: 2024-04-01
 tech: ["Arduino", "Breadboarding", "Circuits"]
 slug: budget_claw_arm
-heroImage: /src/assets/claw_arm_team.png
+heroImage: /claw_arm_team.png
 heroAlt: Robotic claw arm final
 demoLink: https://www.youtube.com/watch?v=ZYhba3NsxUw&list=PLZmdKCwlPqpOyqjGIgm65BrIaFkAm76KW
 ---
@@ -15,7 +15,7 @@ A team of 4 of my friends and I designed a robotic claw arm for the 2024 APEGA S
 
 | Design showcase (click for video!) | The team in action  |
 |--|--|
-|<a href="https://youtu.be/5wc3XobcpKI" target="_blank" rel="noopener noreferrer">![Design showcase](/src/assets/budget_claw_arm.png)</a>|![Team in action](/src/assets/science_olympics_action.png)|
+|<a href="https://youtu.be/5wc3XobcpKI" target="_blank" rel="noopener noreferrer">![Design showcase](/budget_claw_arm.png)</a>|![Team in action](/science_olympics_action.png)|
 <!-- |<a href="https://youtu.be/5wc3XobcpKI" target="_blank" rel="noopener noreferrer"><img src="/budget_claw_arm.png" alt="Design showcase" width="100%" loading="lazy"/></a>|<img src="/science_olympics_action.png" alt="Team in action" width="100%" loading="lazy"/>| -->
 
 ---

@@ -4,7 +4,7 @@ description: A ROS 2 + OpenCV circle-following controller for a Tello drone.
 date: 2025-05-01
 tech: ["ROS 2", "OpenCV", "Python", "C++"]
 slug: tello_circle_follower
-heroImage: /src/assets/circle_follow_demo.png
+heroImage: /circle_follow_demo.png
 heroAlt: Action shot of Tello circle follower
 demoLink: https://youtube.com/shorts/EuOOAuslQJs
 repoLink: https://github.com/routabeta/tello_circle_follower

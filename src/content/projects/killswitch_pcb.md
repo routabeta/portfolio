@@ -4,7 +4,7 @@ description: A Hall Effect sensor PCB that detects magnet presence to toggle pow
 date: 2025-04-12
 tech: ["Altium Designer"]
 slug: killswitch_pcb
-heroImage: /src/assets/killswitch_pcb_raw.png
+heroImage: /killswitch_pcb_raw.png
 heroAlt: Image of my killswitch PCB
 ---
 

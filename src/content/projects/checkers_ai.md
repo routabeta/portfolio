@@ -4,7 +4,7 @@ description: A browser Checkers AI game using a minimax agent with alpha-beta pr
 date: 2023-09-01
 tech: ["Python", "Flask"]
 slug: checkers_ai
-heroImage: /src/assets/checkers_ai.png
+heroImage: /checkers_ai.png
 heroAlt: A game position against my AI
 repoLink: https://github.com/routabeta/Checkers-AI/
 demoLink: https://www.youtube.com/watch?v=b2iJv0at5Rs
